@@ -1,6 +1,8 @@
 // import jobs from './jobs.json' assert { type: "json" };
 
 var _jobs
+var _party = []
+var _partySize = 8
 
 class Mitigation {
     constructor(name, icon, phys, magic) {
@@ -57,13 +59,20 @@ class Job {
     }
 }
 
-function createJob(party, name) {
+function createJob(name) {
+    // A check for party size
+    if (_party.length >= _partySize) {
+        console.log("party at max size")
+        return
+    }
+
     for (let i in _jobs) {
         if (_jobs[i].name == name) {
             console.log(_jobs[i])
             let j = _jobs[i]
             var x = new Job(j.name, j.role, j.icon, [new Mitigation("reprisal", "/bar.ico", 0.5, 0.5)])
-            party.push(x)
+            _party.push(x)
+            displayParty()
             return
         }
     }
@@ -73,18 +82,44 @@ function createJob(party, name) {
     console.log("Unable to find job named: " + name)
 }
 
-function displayParty(party) {
+function resetParty() {
+    _party = []
+    displayParty()
+}
+
+function temp(a) {
+    console.log(a)
+}
+
+function displayJobs() {
+    let jlist = document.getElementById("jobs")
+    jlist.innerHTML = ""
+    for (let i in _jobs) {
+        let el = document.createElement("div")
+        el.onclick = function() { createJob(_jobs[i].name) }
+        let im = document.createElement("img")
+        im.src = _jobs[i].icon
+        el.appendChild(im)
+        jlist.appendChild(el)
+    }
+}
+
+function displayParty() {
     let plist = document.getElementById("party")
     plist.innerHTML = "";
-    for (let i in party) {
+    let reset = document.createElement("div")
+    reset.innerHTML = "reset button"
+    reset.onclick = resetParty
+    plist.appendChild(reset)
+    for (let i in _party) {
         // Create a div/something for each member
         let member = document.createElement("div")
-        member.innerText = party[i].toString()
+        member.innerText = _party[i].toString()
         plist.appendChild(member)
-        plist.appendChild(party[i].getIcon())
+        plist.appendChild(_party[i].getIcon())
         // plist.appendChild(party[i].getMitiIcons())
         
-        console.log(party[i])
+        console.log(_party[i])
         // Fill the container
         // Insert it to the div at the end
     }
@@ -95,14 +130,13 @@ function doError() {
 }
 
 function test() {
-    party = []
-    console.log(party)
-    createJob(party, 'paladin')
-    console.log(party)
-    createJob(party, 'rogue')
-    console.log(party)
+    console.log(_party)
+    createJob('paladin')
+    console.log(_party)
+    createJob('rogue')
+    console.log(_party)
 
-    displayParty(party)
+    displayParty(_party)
 }
 
 
@@ -112,6 +146,7 @@ function start(jobs) {
     // const jobs = require('./jobs.json')
     // console.log(jobs)
     // Considering making the .then of this function be start(data)
+    displayJobs()
     
     test()
 }
