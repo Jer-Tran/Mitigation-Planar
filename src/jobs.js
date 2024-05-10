@@ -110,7 +110,7 @@ function changeOrder(from, to) {
         console.log("invalid party memeber index")
         return
     }
-    if (to < 0 || to >= _party.length) {
+    else if (to < 0 || to >= _party.length) {
         console.log("impossible move " + from + " to " + to)
         return
     }
@@ -118,6 +118,15 @@ function changeOrder(from, to) {
     const member = _party[from]
     _party.splice(from, 1)
     _party.splice(to, 0, member)
+    displayParty()
+}
+
+function removeMember(index) {
+    if (index < 0 || index >= _party.length) {
+        console.log("invalid party memeber index " + index)
+        return
+    }
+    _party.splice(index, 1)
     displayParty()
 }
 
@@ -140,13 +149,17 @@ function displayParty() {
         let left = document.createElement("div")
         left.innerHTML = "<"
         left.onclick = function() { changeOrder(i, i-1) }
-        lower.appendChild(left)
+        let x = document.createElement("div")
+        x.innerHTML = "X"
+        x.onclick = function() { removeMember(i) }
         let right = document.createElement("div")
         right.innerHTML = ">"
         right.onclick = function() { changeOrder(i, parseInt(i)+1) }
         
         // All the appends
         member.appendChild(_party[i].getIcon())
+        lower.appendChild(left)
+        lower.appendChild(x)
         lower.appendChild(right)
         member.appendChild(lower)
         plist.appendChild(member)

@@ -20,4 +20,8 @@ div {
 }
 #order {
     display: flex;
+    justify-content: space-evenly;
+}
+#order > * {
+    margin: 0;
 }
