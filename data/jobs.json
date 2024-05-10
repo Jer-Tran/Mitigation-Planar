@@ -64,14 +64,6 @@
         ]
     },
     {
-        "name": "sage",
-        "role": "healer",
-        "icon": "https://lds-img.finalfantasyxiv.com/promo/h/e/G0lQTD01LdCGk5pECSc7fbbmbM.png",
-        "mits": [
-            
-        ]
-    },
-    {
         "name": "monk",
         "role": "melee",
         "icon": "https://lds-img.finalfantasyxiv.com/promo/h/C/Ce_VQB6VPPJKTGJwxf3h5iujp4.png",

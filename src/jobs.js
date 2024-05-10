@@ -105,25 +105,53 @@ function displayJobs() {
     }
 }
 
+function changeOrder(from, to) {
+    if (from < 0 || from >= _party.length) {
+        console.log("invalid party memeber index")
+        return
+    }
+    if (to < 0 || to >= _party.length) {
+        console.log("impossible move " + from + " to " + to)
+        return
+    }
+    console.log("can, " + from + " to " + to)
+    const member = _party[from]
+    _party.splice(from, 1)
+    _party.splice(to, 0, member)
+    displayParty()
+}
+
 function displayParty() {
-    let plist = document.getElementById("party")
-    plist.innerHTML = "";
+    let party = document.getElementById("party")
+    party.innerHTML = "";
     let reset = document.createElement("div")
     reset.innerHTML = "reset button"
     reset.onclick = resetParty
-    plist.appendChild(reset)
+    party.appendChild(reset)
+    let plist = document.createElement("div")
+    plist.setAttribute("id", "party-list")
     for (let i in _party) {
         // Create a div/something for each member
         let member = document.createElement("div")
-        member.innerText = _party[i].toString()
-        plist.appendChild(member)
-        plist.appendChild(_party[i].getIcon())
-        // plist.appendChild(party[i].getMitiIcons())
+
+        let lower = document.createElement("div")
+        lower.setAttribute("id", "order")
+
+        let left = document.createElement("div")
+        left.innerHTML = "<"
+        left.onclick = function() { changeOrder(i, i-1) }
+        lower.appendChild(left)
+        let right = document.createElement("div")
+        right.innerHTML = ">"
+        right.onclick = function() { changeOrder(i, parseInt(i)+1) }
         
-        console.log(_party[i])
-        // Fill the container
-        // Insert it to the div at the end
+        // All the appends
+        member.appendChild(_party[i].getIcon())
+        lower.appendChild(right)
+        member.appendChild(lower)
+        plist.appendChild(member)
     }
+    party.appendChild(plist)
 }
 
 function doError() {

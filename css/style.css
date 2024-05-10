@@ -12,3 +12,12 @@ div {
 #timeline {
     width: 95%;
 }
+#party-list {
+    display: flex;
+    justify-content: space-evenly;
+    width: 80%;
+    margin: auto;
+}
+#order {
+    display: flex;
+}
