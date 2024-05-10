@@ -5,8 +5,9 @@ div {
 #mit-body {
     display: flex;
 }
-#classes {
-    width: 5%;
+#jobs {
+    display: flex;
+    justify-content: center;
 }
 #timeline {
     width: 95%;

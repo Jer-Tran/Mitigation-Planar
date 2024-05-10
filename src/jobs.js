@@ -94,6 +94,7 @@ function temp(a) {
 function displayJobs() {
     let jlist = document.getElementById("jobs")
     jlist.innerHTML = ""
+    // TODO: Split into roles
     for (let i in _jobs) {
         let el = document.createElement("div")
         el.onclick = function() { createJob(_jobs[i].name) }
