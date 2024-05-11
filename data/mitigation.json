@@ -1,0 +1,20 @@
+{
+    "mitigation": [
+        {
+            "name": "reprisal",
+            "icon": "reprisal.png",
+            "phys": 0.1,
+            "magic": 0.1,
+            "heal": 0,
+            "shield": 0
+        },
+        {
+            "name": "addle",
+            "icon": "addle.png",
+            "phys": 0.05,
+            "magic": 0.1,
+            "heal": 0,
+            "shield": 0
+        }
+    ]
+}

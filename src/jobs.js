@@ -1,8 +1,7 @@
 // import jobs from './jobs.json' assert { type: "json" };
+import { addMember } from "./main.js";
 
 var _jobs
-var _party = []
-var _partySize = 8
 
 class Mitigation {
     constructor(name, icon, phys, magic) {
@@ -59,45 +58,27 @@ class Job {
     }
 }
 
-function createJob(name) {
-    // A check for party size
-    if (_party.length >= _partySize) {
-        console.log("party at max size")
-        return
-    }
-
+export function createJob(name) {
     for (let i in _jobs) {
         if (_jobs[i].name == name) {
-            console.log(_jobs[i])
             let j = _jobs[i]
             var x = new Job(j.name, j.role, j.icon, [new Mitigation("reprisal", "/bar.ico", 0.5, 0.5)])
-            _party.push(x)
-            displayParty()
-            return
+            return x
         }
     }
 
     // The file will contain job name, its role, link to their job icon, and their personal job mits
     // return new Job(name, "bar", "/foo.ico", [new Mitigation("reprisal", "/bar.ico", 0.5, 0.5)])
-    console.log("Unable to find job named: " + name)
+    throw ("Unable to find job named: " + name)
 }
 
-function resetParty() {
-    _party = []
-    displayParty()
-}
-
-function temp(a) {
-    console.log(a)
-}
-
-function displayJobs() {
+export function displayJobs() {
     let jlist = document.getElementById("jobs")
     jlist.innerHTML = ""
     // TODO: Split into roles, solely for front-end visuals
     for (let i in _jobs) {
         let el = document.createElement("div")
-        el.onclick = function() { createJob(_jobs[i].name) }
+        el.onclick = function() { addMember(_jobs[i].name) }
         let im = document.createElement("img")
         im.src = _jobs[i].icon
         el.appendChild(im)
@@ -105,94 +86,7 @@ function displayJobs() {
     }
 }
 
-function changeOrder(from, to) {
-    if (from < 0 || from >= _party.length) {
-        console.log("invalid party memeber index")
-        return
-    }
-    else if (to < 0 || to >= _party.length) {
-        console.log("impossible move " + from + " to " + to)
-        return
-    }
-    console.log("can, " + from + " to " + to)
-    const member = _party[from]
-    _party.splice(from, 1)
-    _party.splice(to, 0, member)
-    displayParty()
-}
-
-function removeMember(index) {
-    if (index < 0 || index >= _party.length) {
-        console.log("invalid party memeber index " + index)
-        return
-    }
-    _party.splice(index, 1)
-    displayParty()
-}
-
-function displayParty() {
-    let party = document.getElementById("party")
-    party.innerHTML = "";
-    let reset = document.createElement("div")
-    reset.innerHTML = "reset button"
-    reset.onclick = resetParty
-    party.appendChild(reset)
-    let plist = document.createElement("div")
-    plist.setAttribute("id", "party-list")
-    for (let i in _party) {
-        // Create a div/something for each member
-        let member = document.createElement("div")
-
-        let lower = document.createElement("div")
-        lower.setAttribute("id", "order")
-
-        let left = document.createElement("div")
-        left.innerHTML = "<"
-        left.onclick = function() { changeOrder(i, i-1) }
-        let x = document.createElement("div")
-        x.innerHTML = "X"
-        x.onclick = function() { removeMember(i) }
-        let right = document.createElement("div")
-        right.innerHTML = ">"
-        right.onclick = function() { changeOrder(i, parseInt(i)+1) }
-        
-        // All the appends
-        member.appendChild(_party[i].getIcon())
-        lower.appendChild(left)
-        lower.appendChild(x)
-        lower.appendChild(right)
-        member.appendChild(lower)
-        plist.appendChild(member)
-    }
-    party.appendChild(plist)
-}
-
-function doError() {
-    // console.log("send help")
-}
-
-function test() {
-    console.log(_party)
-    createJob('paladin')
-    console.log(_party)
-    createJob('rogue')
-    console.log(_party)
-
-    displayParty(_party)
-}
-
-
-function start(jobs) {
+export function loadJobs(jobs) {
     _jobs = jobs["jobs"] // Changing to a dictionary is a good idea down the line
     console.log(_jobs)
-    // const jobs = require('./jobs.json')
-    // console.log(jobs)
-    // Considering making the .then of this function be start(data)
-    displayJobs()
-    
-    test()
 }
-
-fetch("./data/jobs.json").then(res => {return res.json();}).then(jobs => 
-    start(jobs)
-).catch(doError())
