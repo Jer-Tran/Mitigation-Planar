@@ -94,7 +94,7 @@ function temp(a) {
 function displayJobs() {
     let jlist = document.getElementById("jobs")
     jlist.innerHTML = ""
-    // TODO: Split into roles
+    // TODO: Split into roles, solely for front-end visuals
     for (let i in _jobs) {
         let el = document.createElement("div")
         el.onclick = function() { createJob(_jobs[i].name) }
@@ -183,7 +183,7 @@ function test() {
 
 
 function start(jobs) {
-    _jobs = jobs // Changing to a dictionary is a good idea down the line
+    _jobs = jobs["jobs"] // Changing to a dictionary is a good idea down the line
     console.log(_jobs)
     // const jobs = require('./jobs.json')
     // console.log(jobs)
