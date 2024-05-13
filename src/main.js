@@ -51,20 +51,36 @@ function removeMember(index) {
     displayParty()
 }
 
-function displayMits() {
-    let d = document.getElementById("mits")
-    d.innerHTML = ""
+function createLowerButtons(i) {
+    let lower = document.createElement("div")
+    lower.setAttribute("id", "order")
+
+    let left = document.createElement("div")
+    left.innerHTML = "<"
+    left.onclick = function() { changeOrder(i, parseInt(i-1)) }
+    let x = document.createElement("div")
+    x.innerHTML = "X"
+    x.onclick = function() { removeMember(i) }
+    let right = document.createElement("div")
+    right.innerHTML = ">"
+    right.onclick = function() { changeOrder(i, parseInt(i)+1) }
+
+    lower.appendChild(left)
+    lower.appendChild(x)
+    lower.appendChild(right)
+
+    return lower
+}
+
+// Receives the list of mits
+function createMitsDiv(mits) {
     let el = document.createElement("div")
     el.setAttribute("id", "miti-list")
-    for (let i in _party) {
-        let div = document.createElement("div")
-        let m = _party[i].mits
-        for (let j in m) {
-            div.appendChild(m[j].getIcon())
-        }
-        el.appendChild(div)
+    for (let i in mits) {
+        el.appendChild(mits[i].getIcon())
     }
-    d.appendChild(el)
+
+    return el
 }
 
 function displayParty() {
@@ -80,30 +96,16 @@ function displayParty() {
         // Create a div/something for each member
         let member = document.createElement("div")
 
-        let lower = document.createElement("div")
-        lower.setAttribute("id", "order")
-
-        let left = document.createElement("div")
-        left.innerHTML = "<"
-        left.onclick = function() { changeOrder(i, i-1) }
-        let x = document.createElement("div")
-        x.innerHTML = "X"
-        x.onclick = function() { removeMember(i) }
-        let right = document.createElement("div")
-        right.innerHTML = ">"
-        right.onclick = function() { changeOrder(i, parseInt(i)+1) }
+        let lower = createLowerButtons(i)
+        let mits = createMitsDiv(_party[i].mits)
         
         // All the appends
         member.appendChild(_party[i].getIcon())
-        lower.appendChild(left)
-        lower.appendChild(x)
-        lower.appendChild(right)
         member.appendChild(lower)
+        member.appendChild(mits)
         plist.appendChild(member)
     }
     party.appendChild(plist)
-
-    displayMits()
 }
 
 function test() {

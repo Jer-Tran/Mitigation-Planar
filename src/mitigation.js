@@ -18,7 +18,7 @@ class Mitigation {
     getIcon() {
         let img = document.createElement("img")
         img.src = this.icon
-        img.alt = this.icon
+        img.alt = this.displayName
         return img
     }
 }

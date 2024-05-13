@@ -17,6 +17,24 @@
             "magic": 0.1,
             "heal": 0,
             "shield": 0
+        },
+        {
+            "name": "feint",
+            "display_name": "Feint",
+            "icon": "https://lds-img.finalfantasyxiv.com/d/84c26a86cbbb8a599e5a2441cebcd33b0064bf07.png",
+            "phys": 0.1,
+            "magic": 0.05,
+            "heal": 0,
+            "shield": 0
+        },
+        {
+            "name": "divineveil",
+            "display_name": "Divine Veil",
+            "icon": "https://lds-img.finalfantasyxiv.com/d/495faab61344751872ca0867e2d5e59b04c6940c.png",
+            "phys": 0,
+            "magic": 0,
+            "heal": 400,
+            "shield": 400
         }
     ]
 }

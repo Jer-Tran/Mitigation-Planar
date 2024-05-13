@@ -5,7 +5,8 @@
             "role": "tank",
             "icon": "https://lds-img.finalfantasyxiv.com/promo/h/V/NUXU4h6iXzF8HS4BxHKYf7vOa0.png",
             "mits": [
-                "reprisal"
+                "reprisal",
+                "divineveil"
             ]
         },
         {
@@ -13,7 +14,7 @@
             "role": "tank",
             "icon": "https://lds-img.finalfantasyxiv.com/promo/h/0/U3f8Q98TbAeGvg_vXiHGOaa2d4.png",
             "mits": [
-                
+                "reprisal"
             ]
         },
         {
@@ -21,7 +22,7 @@
             "role": "tank",
             "icon": "https://lds-img.finalfantasyxiv.com/promo/h/9/5JT3hJnBNPZSLAijAF9u7zrueQ.png",
             "mits": [
-                
+                "reprisal"
             ]
         },
         {
@@ -29,7 +30,7 @@
             "role": "tank",
             "icon": "https://lds-img.finalfantasyxiv.com/promo/h/8/fc5PYpEFGrg4qPYDq_YBbCy1X0.png",
             "mits": [
-                
+                "reprisal"
             ]
         },
         {
@@ -69,7 +70,7 @@
             "role": "melee",
             "icon": "https://lds-img.finalfantasyxiv.com/promo/h/C/Ce_VQB6VPPJKTGJwxf3h5iujp4.png",
             "mits": [
-                
+                "feint"
             ]
         },
         {
@@ -77,7 +78,7 @@
             "role": "melee",
             "icon": "https://lds-img.finalfantasyxiv.com/promo/h/1/zWRkXGJIJhN7WHGGv1gVscRxmA.png",
             "mits": [
-                
+                "feint"
             ]
         },
         {
@@ -85,7 +86,7 @@
             "role": "melee",
             "icon": "https://lds-img.finalfantasyxiv.com/promo/h/N/EXvdQYvr1Rn4En8AKssbVwwcac.png",
             "mits": [
-                
+                "feint"
             ]
         },
         {
@@ -93,7 +94,7 @@
             "role": "melee",
             "icon": "https://lds-img.finalfantasyxiv.com/promo/h/J/Ra2GV79gVQhy6SwCrU19boTghc.png",
             "mits": [
-                
+                "feint"
             ]
         },
         {
@@ -101,7 +102,7 @@
             "role": "melee",
             "icon": "https://lds-img.finalfantasyxiv.com/promo/h/p/y8GHAXX4qhY7D-yqnCqtEPkjoo.png",
             "mits": [
-                
+                "feint"
             ]
         },
         {
@@ -133,7 +134,7 @@
             "role": "caster",
             "icon": "https://lds-img.finalfantasyxiv.com/promo/h/A/7JuT00VSwaFqTfcTYUCUnGPFQE.png",
             "mits": [
-                
+                "addle"
             ]
         },
         {
@@ -141,7 +142,7 @@
             "role": "caster",
             "icon": "https://lds-img.finalfantasyxiv.com/promo/h/b/ZwJFxv3XnfqB5N6tKbgXKnj6BU.png",
             "mits": [
-                
+                "addle"
             ]
         },
         {
@@ -149,7 +150,7 @@
             "role": "caster",
             "icon": "https://lds-img.finalfantasyxiv.com/promo/h/C/NRnqJxzRtbDKR1ZHzxazWBBR2Y.png",
             "mits": [
-                
+                "addle"   
             ]
         }
     ]
