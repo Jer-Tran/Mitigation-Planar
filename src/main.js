@@ -51,6 +51,22 @@ function removeMember(index) {
     displayParty()
 }
 
+function displayMits() {
+    let d = document.getElementById("mits")
+    d.innerHTML = ""
+    let el = document.createElement("div")
+    el.setAttribute("id", "miti-list")
+    for (let i in _party) {
+        let div = document.createElement("div")
+        let m = _party[i].mits
+        for (let j in m) {
+            div.appendChild(m[j].getIcon())
+        }
+        el.appendChild(div)
+    }
+    d.appendChild(el)
+}
+
 function displayParty() {
     let party = document.getElementById("party")
     party.innerHTML = "";
@@ -86,12 +102,14 @@ function displayParty() {
         plist.appendChild(member)
     }
     party.appendChild(plist)
+
+    displayMits()
 }
 
 function test() {
-    console.log(_party)
+    // console.log(_party)
     addMember('paladin')
-    console.log(_party)
+    // console.log(_party)
     addMember('rogue')
     console.log(_party)
 

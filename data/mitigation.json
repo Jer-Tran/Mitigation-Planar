@@ -3,7 +3,7 @@
         {
             "name": "reprisal",
             "display_name": "Reprisal",
-            "icon": "reprisal.png",
+            "icon": "https://lds-img.finalfantasyxiv.com/d/6b83d9368623d5cd20a426d26916021b59a14963.png",
             "phys": 0.1,
             "magic": 0.1,
             "heal": 0,
@@ -12,7 +12,7 @@
         {
             "name": "addle",
             "display_name": "Addle",
-            "icon": "addle.png",
+            "icon": "https://lds-img.finalfantasyxiv.com/d/b45e688d81b5607246600f904aac008364db0d1e.png",
             "phys": 0.05,
             "magic": 0.1,
             "heal": 0,

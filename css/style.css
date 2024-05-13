@@ -25,3 +25,12 @@ div {
 #order > * {
     margin: 0;
 }
+#miti-list {
+    display: flex;
+    justify-content: space-evenly;
+    width: 80%;
+    margin: auto;
+}
+#miti-list img {
+    width: 3em;
+}

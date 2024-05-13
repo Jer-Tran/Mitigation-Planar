@@ -1,7 +1,7 @@
 var _mits
 
 class Mitigation {
-    constructor(name, dispalyName, icon, phys, magic, heal, shield) {
+    constructor(name, displayName, icon, phys, magic, heal, shield) {
         this.name = name
         this.displayName = displayName
         this.icon = icon
@@ -12,7 +12,7 @@ class Mitigation {
     }
 
     toString() {
-        return this.name + " " + this.icon
+        return this.name + " " + this.icon + " " + this.phys + " " + this.magic + " " + this.heal + " " + this.shield
     }
 
     getIcon() {
@@ -26,18 +26,16 @@ class Mitigation {
 export function createMiti(name) {
     for (let i in _mits) {
         if (_mits[i].name == name) {
-            // let j = _mits[i]
-            var x = new Mitigation("reprisal", "/bar.ico", 0.5, 0.5)
+            let m = _mits[i]
+            var x = new Mitigation(m.name, m.display_name, m.icon, m.phys, m.magic, m.heal, m.shield)
             return x
         }
     }
 
-    // The file will contain job name, its role, link to their job icon, and their personal job mits
-    // return new Job(name, "bar", "/foo.ico", [new Mitigation("reprisal", "/bar.ico", 0.5, 0.5)])
-    throw ("Unable to find job named: " + name)
+    throw ("Unable to find mitigation named: " + name)
 }
 
 export function loadMits(mits) {
     _mits = mits["mitigation"] // Changing to a dictionary is a good idea down the line
-    console.log(_mits)
+    // console.log(_mits)
 }

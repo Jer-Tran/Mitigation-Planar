@@ -1,27 +1,8 @@
 // import jobs from './jobs.json' assert { type: "json" };
 import { addMember } from "./main.js";
+import { createMiti } from "./mitigation.js";
 
 var _jobs
-
-class Mitigation {
-    constructor(name, icon, phys, magic) {
-        this.name = name;
-        this.icon = icon;
-        this.phys = phys;
-        this.magic = magic;
-    }
-
-    toString() {
-        return this.name + " " + this.icon
-    }
-
-    getIcon() {
-        let img = document.createElement("img")
-        img.src = this.icon
-        img.alt = this.icon
-        return img
-    }
-}
 
 class Job {
     constructor(name, role, icon, mits) {
@@ -58,11 +39,26 @@ class Job {
     }
 }
 
+function createMitList(mits) {
+    let list = []
+    console.log("mits are: " + mits)
+    for (let i in mits) {
+        try {
+            let m = createMiti(mits[i])
+            list.push(m)
+        }
+        catch {
+            continue
+        }
+    }
+    return list
+}
+
 export function createJob(name) {
     for (let i in _jobs) {
         if (_jobs[i].name == name) {
             let j = _jobs[i]
-            let m = []
+            let m = createMitList(j.mits)
             // Something to create mits list
             // Down the line, potentially be able to get reprisal, feint, etc using role and join with above list
             var x = new Job(j.name, j.role, j.icon, m)
@@ -70,8 +66,6 @@ export function createJob(name) {
         }
     }
 
-    // The file will contain job name, its role, link to their job icon, and their personal job mits
-    // return new Job(name, "bar", "/foo.ico", [new Mitigation("reprisal", "/bar.ico", 0.5, 0.5)])
     throw ("Unable to find job named: " + name)
 }
 
@@ -91,5 +85,5 @@ export function displayJobs() {
 
 export function loadJobs(jobs) {
     _jobs = jobs["jobs"] // Changing to a dictionary is a good idea down the line
-    console.log(_jobs)
+    // console.log(_jobs)
 }
