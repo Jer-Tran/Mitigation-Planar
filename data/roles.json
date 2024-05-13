@@ -2,6 +2,7 @@
     "tank": [
         {
             "name": "reprisal",
+            "display_name": "Reprisal",
             "icon": "reprisal.png",
             "phys": 0.1,
             "magic": 0.1
@@ -10,6 +11,7 @@
     "caster": [
         {
             "name": "addle",
+            "display_name": "Addle",
             "icon": "addle.png",
             "phys": 0.05,
             "magic": 0.1

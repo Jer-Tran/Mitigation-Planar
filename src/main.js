@@ -1,4 +1,5 @@
 import { createJob, displayJobs, loadJobs } from "./jobs.js"
+import { loadMits } from "./mitigation.js"
 
 var _party = []
 var _partySize = 8
@@ -103,6 +104,7 @@ function doError() {
 
 function start(jobs, mits) {
     loadJobs(jobs)
+    loadMits(mits)
     displayJobs()
     
     test()

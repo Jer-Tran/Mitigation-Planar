@@ -62,7 +62,10 @@ export function createJob(name) {
     for (let i in _jobs) {
         if (_jobs[i].name == name) {
             let j = _jobs[i]
-            var x = new Job(j.name, j.role, j.icon, [new Mitigation("reprisal", "/bar.ico", 0.5, 0.5)])
+            let m = []
+            // Something to create mits list
+            // Down the line, potentially be able to get reprisal, feint, etc using role and join with above list
+            var x = new Job(j.name, j.role, j.icon, m)
             return x
         }
     }
