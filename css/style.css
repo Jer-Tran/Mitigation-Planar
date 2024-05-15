@@ -1,3 +1,6 @@
+:root {
+    --icon-size: 30px;
+}
 div {
     border: 1px solid;
     margin: 10px;
@@ -39,4 +42,12 @@ div {
 }
 #miti-list img {
     width: 60%;
+}
+#classes img {
+    width: var(--icon-size);
+}
+#classes div {
+    width: var(--icon-size);
+    height: var(--icon-size);
+    margin: auto;
 }

@@ -6,7 +6,7 @@ var _partySize = 8
 
 function resetParty() {
     _party = []
-    displayParty()
+    updateDisplay()
 }
 
 function changeOrder(from, to) {
@@ -22,7 +22,7 @@ function changeOrder(from, to) {
     const member = _party[from]
     _party.splice(from, 1)
     _party.splice(to, 0, member)
-    displayParty()
+    updateDisplay()
 }
 
 export function addMember(name) {
@@ -35,7 +35,7 @@ export function addMember(name) {
     try {
         let x = createJob(name)
         _party.push(x)
-        displayParty()
+        updateDisplay()
     }
     catch(err) {
         console.log("Unable to find job named: " + name)
@@ -48,7 +48,7 @@ function removeMember(index) {
         return
     }
     _party.splice(index, 1)
-    displayParty()
+    updateDisplay()
 }
 
 function createLowerButtons(i) {
@@ -83,6 +83,11 @@ function createMitsDiv(mits) {
     return el
 }
 
+function updateDisplay() {
+    displayParty()
+    displayIcons()
+}
+
 function displayParty() {
     let party = document.getElementById("party")
     party.innerHTML = "";
@@ -108,6 +113,21 @@ function displayParty() {
     party.appendChild(plist)
 }
 
+function displayIcons() {
+    let el = document.getElementById("classes")
+    el.innerHTML = ""
+    for (let i = 0; i < _partySize; i++) {
+        let slot = document.createElement("div")
+        try {
+            slot.appendChild(_party[i].getIcon())
+        }
+        catch {
+            //pass
+        }
+        el.appendChild(slot)
+    }
+}
+
 function test() {
     // console.log(_party)
     addMember('paladin')
@@ -116,6 +136,9 @@ function test() {
     console.log(_party)
 
     displayParty(_party)
+
+    // var r = document.querySelector(':root')
+    // r.style.setProperty('--icon-size', '50px')
 }
 
 function doError() {
