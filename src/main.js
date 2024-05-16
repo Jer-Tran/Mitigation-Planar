@@ -1,8 +1,13 @@
 import { createJob, displayJobs, loadJobs } from "./jobs.js"
 import { loadMits } from "./mitigation.js"
+import { displayTimeline } from "./timeline.js"
 
 var _party = []
 var _partySize = 8
+
+export function getPartySize() {
+    return _partySize
+}
 
 function resetParty() {
     _party = []
@@ -86,6 +91,7 @@ function createMitsDiv(mits) {
 function updateDisplay() {
     displayParty()
     displayIcons()
+    displayTimeline()
 }
 
 function displayParty() {
@@ -116,7 +122,10 @@ function displayParty() {
 function displayIcons() {
     let el = document.getElementById("classes")
     el.innerHTML = ""
+    let t = document.createElement("table")
     for (let i = 0; i < _partySize; i++) {
+        let r = document.createElement("tr")
+        let d = document.createElement("td")
         let slot = document.createElement("div")
         try {
             slot.appendChild(_party[i].getIcon())
@@ -124,8 +133,11 @@ function displayIcons() {
         catch {
             //pass
         }
-        el.appendChild(slot)
+        d.appendChild(slot)
+        r.appendChild(d)
+        t.appendChild(r)
     }
+    el.appendChild(t)
 }
 
 function test() {

@@ -1,5 +1,7 @@
 :root {
     --icon-size: 30px;
+    --timeline-width: 100%;
+    --timeslot-width: 30px;
 }
 div {
     border: 1px solid;
@@ -50,4 +52,26 @@ div {
     width: var(--icon-size);
     height: var(--icon-size);
     margin: auto;
+}
+#classes table {
+    border-spacing: 0;
+    border-collapse: collapse;
+    height: 100%;
+}
+#timeline {
+    width: var(--timeline-width);
+}
+#timeline table {
+    border-spacing: 0;
+    border-collapse: collapse;
+    height:100%;
+}
+#timeline tr {
+    border: 1px solid;
+    height: var(--icon-size);
+}
+#timeline td {
+    border: 1px solid lightgrey;
+    height: var(--icon-size);
+    width: var(--timeslot-width);
 }
