@@ -60,6 +60,18 @@ div {
 }
 #timeline {
     width: var(--timeline-width);
+    overflow: hidden;
+    font-size: 12px;
+}
+#timeline div {
+    border: none;
+    margin: 0;
+    width: var(--timeslot-width);
+    height: var(--icon-size);
+    /* overflow: hidden; */
+    /* overflow-y: hidden; */
+    /* overflow-x: visible; */
+    white-space: nowrap;
 }
 #timeline table {
     border-spacing: 0;
@@ -74,4 +86,9 @@ div {
     border: 1px solid lightgrey;
     height: var(--icon-size);
     width: var(--timeslot-width);
+    overflow-x: hidden;
+}
+.mech {
+    /* Figure out how to make this prio later */
+    border: none;
 }

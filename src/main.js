@@ -123,7 +123,8 @@ function displayIcons() {
     let el = document.getElementById("classes")
     el.innerHTML = ""
     let t = document.createElement("table")
-    for (let i = 0; i < _partySize; i++) {
+    // -1 to leave space for timeline mechanics
+    for (let i = -1; i < _partySize; i++) {
         let r = document.createElement("tr")
         let d = document.createElement("td")
         let slot = document.createElement("div")
