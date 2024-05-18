@@ -1,6 +1,6 @@
 import { createJob, displayJobs, loadJobs } from "./jobs.js"
 import { loadMits } from "./mitigation.js"
-import { displayTimeline } from "./timeline.js"
+import { displayTimeline, loadInstance } from "./timeline.js"
 
 var _party = []
 var _partySize = 8
@@ -141,15 +141,20 @@ function displayIcons() {
     el.appendChild(t)
 }
 
+function displayInstanceList() {
+    let inst = document.getElementById("instance")
+    inst.innerText = "<press to load>"
+    inst.onclick = function () { loadInstance("test.json") }
+}
+
 function test() {
     // console.log(_party)
-    addMember('paladin')
+    // addMember('paladin')
     // console.log(_party)
-    addMember('rogue')
+    // addMember('rogue')
     console.log(_party)
-
-    displayParty(_party)
-
+    // loadInstance("test.json")
+    
     // var r = document.querySelector(':root')
     // r.style.setProperty('--icon-size', '50px')
 }
@@ -162,6 +167,8 @@ function start(jobs, mits) {
     loadJobs(jobs)
     loadMits(mits)
     displayJobs()
+    displayInstanceList()
+    updateDisplay()
     
     test()
 }

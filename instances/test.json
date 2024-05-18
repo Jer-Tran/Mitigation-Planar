@@ -1,0 +1,14 @@
+{
+    "10": {
+        "name": "boom",
+        "type": "magic"
+    },
+    "60": {
+        "name": "boom2",
+        "type": "phys"
+    },
+    "100": {
+        "name": "final boom",
+        "type": "magic"
+    }
+}

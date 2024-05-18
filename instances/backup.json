@@ -1,0 +1,19 @@
+{
+    "data": [
+        {
+            "name": "boom",
+            "time": "10",
+            "type": "magic"
+        },
+        {
+            "name": "boom2",
+            "time": "60",
+            "type": "physical"
+        },
+        {
+            "name": "final boom",
+            "time": "100",
+            "type": "magic"
+        }
+    ]
+}
