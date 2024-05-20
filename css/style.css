@@ -97,6 +97,18 @@ div {
 }
 #instance-active {
     margin: 0;
+    width: 40%;
+    display: flex;
+}
+#instance-active img {
+    margin: 10px;
+    height: auto;
+}
+.inst-tab {
+    display: flex;
+}
+.inst-tab img {
+    height: auto;
 }
 #instance-dropdown {
     display: none;

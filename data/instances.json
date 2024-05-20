@@ -1,10 +1,12 @@
 [
     {
         "name": "That one fight",
+        "icon": "./favicon.ico",
         "file": "test.json"
     },
     {
         "name": "That other fight",
+        "icon": "./favicon.ico",
         "file": "test2.json"
     }
 ]

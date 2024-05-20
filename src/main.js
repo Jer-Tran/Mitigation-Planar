@@ -148,7 +148,7 @@ function displayInstanceList() {
     document.getElementById("instance-dropdown").style.display = "block";
 
     window.onclick = function(event) {
-        if (!event.target.matches('#instance-active') && !event.target.matches('#instance-dropdown')) {
+        if (!event.target.matches('.instance')) {
             hideInstanceList()
             window.onclick = function () {} // Removes itself when not needed
         }
@@ -162,7 +162,16 @@ function hideInstanceList() {
 }
 
 function setInstance(inst) {
-    // stuff on #instance-active
+    let curr = document.getElementById("instance-active")
+    curr.innerHTML = ""
+    let ico = document.createElement("img")
+    ico.src = inst['icon']
+    ico.className = "instance"
+    let name = document.createElement("div")
+    name.innerText = inst['name']
+    name.className = "instance"
+    curr.appendChild(ico)
+    curr.appendChild(name)
     loadInstance(inst['file'])
 }
 
@@ -171,7 +180,14 @@ function loadInstanceList(insts) {
     drop.innerHTML = ""
     for (let i in insts) {
         let inst = document.createElement("div")
-        inst.innerHTML = insts[i]['name']
+        inst.className = "inst-tab"
+        let ico = document.createElement("img")
+        ico.src = inst['icon']
+        let name = document.createElement("div")
+        name.innerText = inst['name']
+        inst.appendChild(ico)
+        inst.appendChild(name)
+        
         inst.onclick = function() { setInstance(insts[i]) }
         drop.appendChild(inst)
     }
