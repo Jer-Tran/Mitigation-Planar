@@ -4,6 +4,7 @@ import { displayTimeline, loadInstance } from "./timeline.js"
 
 var _party = []
 var _partySize = 8
+var _instances = []
 
 export function getPartySize() {
     return _partySize
@@ -141,10 +142,42 @@ function displayIcons() {
     el.appendChild(t)
 }
 
+// Opens the drop down menu thing
 function displayInstanceList() {
+    // Toggles between
+    document.getElementById("instance-dropdown").style.display = "block";
+    console.log("a")
+
+    window.onclick = function(event) {
+        console.log('b')
+        if (!event.target.matches('#instance-active') && !event.target.matches('#instance-dropdown')) {
+            console.log('c')
+            hideInstanceList()
+            window.onclick = function () {} // Removes itself when not needed
+        }
+    }
+}
+
+// Closes drop down menu to do normal things again
+function hideInstanceList() {
+    // do stuff
+    document.getElementById("instance-dropdown").style.display = "none";
+}
+
+function generateInstanceList() {
     let inst = document.getElementById("instance")
-    inst.innerText = "<press to load>"
-    inst.onclick = function () { loadInstance("test.json") }
+
+    document.getElementById("instance-active").onclick = displayInstanceList
+
+    // Generate an inner div which shows the current instance name
+    // When clicked on, opens up a drop-down menu in-place with list of all available instances
+    //  For each of these named instances, clicking on them, will apply the loadInstance() function with the appropriate file name
+    //  Clicking anywhere else will close this drop down
+
+    // Retrieve list, and put it into var
+    fetch('./data/instances.json').then(res => {return res.json();}).then(inst => 
+        _instances = inst
+    ).catch((error) => { console.log(error) })
 }
 
 function test() {
@@ -167,7 +200,7 @@ function start(jobs, mits) {
     loadJobs(jobs)
     loadMits(mits)
     displayJobs()
-    displayInstanceList()
+    generateInstanceList()
     updateDisplay()
     
     test()

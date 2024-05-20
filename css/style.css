@@ -92,3 +92,15 @@ div {
     /* Figure out how to make this prio later */
     border: none;
 }
+#instance {
+    padding: 10px;
+}
+#instance-active {
+    margin: 0;
+}
+#instance-dropdown {
+    display: none;
+    background-color: white;
+    position: absolute;
+    margin: 0;
+}

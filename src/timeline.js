@@ -12,7 +12,6 @@ function setStyle(attr, val) {
 export function displayTimeline() {
     let tl = document.getElementById("timeline")
     let width = tl.offsetWidth
-    // console.log((width / _secondsSeen))
     // Magic value but this somehow allows all time slots to be seen
     setStyle("--timeslot-width", ((width - 3 * _secondsSeen) / _secondsSeen) + "px")
     tl.innerHTML = ""
