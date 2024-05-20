@@ -146,12 +146,9 @@ function displayIcons() {
 function displayInstanceList() {
     // Toggles between
     document.getElementById("instance-dropdown").style.display = "block";
-    console.log("a")
 
     window.onclick = function(event) {
-        console.log('b')
         if (!event.target.matches('#instance-active') && !event.target.matches('#instance-dropdown')) {
-            console.log('c')
             hideInstanceList()
             window.onclick = function () {} // Removes itself when not needed
         }
@@ -164,8 +161,24 @@ function hideInstanceList() {
     document.getElementById("instance-dropdown").style.display = "none";
 }
 
+function setInstance(inst) {
+    // stuff on #instance-active
+    loadInstance(inst['file'])
+}
+
+function loadInstanceList(insts) {
+    let drop = document.getElementById("instance-dropdown")
+    drop.innerHTML = ""
+    for (let i in insts) {
+        let inst = document.createElement("div")
+        inst.innerHTML = insts[i]['name']
+        inst.onclick = function() { setInstance(insts[i]) }
+        drop.appendChild(inst)
+    }
+}
+
 function generateInstanceList() {
-    let inst = document.getElementById("instance")
+    // let inst = document.getElementById("instance")
 
     document.getElementById("instance-active").onclick = displayInstanceList
 
@@ -175,8 +188,10 @@ function generateInstanceList() {
     //  Clicking anywhere else will close this drop down
 
     // Retrieve list, and put it into var
-    fetch('./data/instances.json').then(res => {return res.json();}).then(inst => 
-        _instances = inst
+    fetch('./data/instances.json').then(res => {return res.json();}).then(insts => {
+        _instances = insts;
+        loadInstanceList(insts)
+    }
     ).catch((error) => { console.log(error) })
 }
 

@@ -104,3 +104,6 @@ div {
     position: absolute;
     margin: 0;
 }
+#instance-dropdown div {
+    margin: 0;
+}
