@@ -168,7 +168,7 @@ function setInstance(inst) {
     ico.src = inst['icon']
     ico.className = "instance"
     let name = document.createElement("div")
-    name.innerText = inst['name']
+    name.innerHTML = inst['name']
     name.className = "instance"
     curr.appendChild(ico)
     curr.appendChild(name)
@@ -182,9 +182,9 @@ function loadInstanceList(insts) {
         let inst = document.createElement("div")
         inst.className = "inst-tab"
         let ico = document.createElement("img")
-        ico.src = inst['icon']
+        ico.src = insts[i]['icon']
         let name = document.createElement("div")
-        name.innerText = inst['name']
+        name.innerText = insts[i]['name']
         inst.appendChild(ico)
         inst.appendChild(name)
         
