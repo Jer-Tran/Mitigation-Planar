@@ -1,6 +1,7 @@
 import { getPartySize } from "./main.js"
 
-var _secondsSeen = 120
+var _secondsSeen = 240
+var _start = 0
 var _instance
 var _mits = {}
 
@@ -11,16 +12,24 @@ function setStyle(attr, val) {
 
 export function displayTimeline() {
     let tl = document.getElementById("timeline")
+    // I've lost the sauce with what I was doing here, so just a reminder for myself that this is about setting inner div sizes to balance so that we still see enough of the timeline
+    // Maybe set it to a multiplier down the line
     let width = tl.offsetWidth
-    // Magic value but this somehow allows all time slots to be seen
-    setStyle("--timeslot-width", ((width - 3 * _secondsSeen) / _secondsSeen) + "px")
+    let px = 1
+    setStyle("--timeslot-width", px + "px")
+    try {
+        console.log(Object.keys(_instance))
+    }
+    catch(error) {
+        console.log(error)
+    }
+
     tl.innerHTML = ""
     let t = document.createElement("table")
     // -1 to leave space for timeline mechanics
     for (let i = -1; i < getPartySize(); i++) {
         let r = document.createElement("tr")
-        var start = 0
-        for (let j = start; j < _secondsSeen + start; j++) {
+        for (let j = _start; j < _secondsSeen + _start; j++) {
             let td = document.createElement("td")
             let d = document.createElement("div")
             // Handling instance mechanics labelling
@@ -64,5 +73,10 @@ export function loadInstance(fname) {
     ).catch((error) => {
         console.log(error)
       })
+    
+}
+
+export function moveStart(val) {
+    // Assume present state can see at least 1 mech
     
 }
