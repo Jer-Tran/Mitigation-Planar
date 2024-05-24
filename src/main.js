@@ -1,6 +1,6 @@
 import { createJob, displayJobs, loadJobs } from "./jobs.js"
 import { loadMits } from "./mitigation.js"
-import { displayTimeline, loadInstance } from "./timeline.js"
+import { displayTimeline, loadInstance, moveStart, setStart, moveSeen } from "./timeline.js"
 
 var _party = []
 var _partySize = 8
@@ -233,6 +233,13 @@ function start(jobs, mits) {
     displayJobs()
     generateInstanceList()
     updateDisplay()
+
+    // document.getElementById("scroll-left").onclick = function() { moveStart(-1) }
+    document.getElementById("scroll-start").onclick = function() { setStart(0); resetSeen() }
+    document.getElementById("scroll-left").onmousedown = (function() { moveStart(-1) })
+    document.getElementById("scroll-right").onclick = function() { moveStart(1) }
+    document.getElementById("zoom-less").onclick = function() { moveSeen(10) }
+    document.getElementById("zoom-more").onclick = function() { moveSeen(-10) }
     
     test()
 }

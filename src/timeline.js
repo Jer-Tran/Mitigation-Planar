@@ -1,8 +1,10 @@
 import { getPartySize } from "./main.js"
 
-var _secondsSeen = 240
+const defaultSeen = 180
+var _secondsSeen = defaultSeen
 var _start = 0
 var _instance
+var _instLen = 0
 var _mits = {}
 
 function setStyle(attr, val) {
@@ -44,6 +46,9 @@ export function displayTimeline() {
                 catch {
                     // pass
                 }
+                if (j % 60 == 0) {
+                    d.innerText += '\n' + '|'
+                }
             }
             // d.innerHTML = j
             td.appendChild(d)
@@ -65,6 +70,8 @@ export function loadInstance(fname) {
 
     function loadInst(data) {
         _instance = data
+        _instLen = 0 // Do some calcs here
+        console.log(_instLen)
         displayTimeline()
     }
 
@@ -79,4 +86,28 @@ export function loadInstance(fname) {
 export function moveStart(val) {
     // Assume present state can see at least 1 mech
     
+    _start = _start + val
+    if (_start < 0) {
+        _start = 0
+    }
+    displayTimeline()
+}
+
+export function setStart(val) {
+    _start = val
+    if (_start < 0) {
+        _start = 0
+    }
+    displayTimeline()
+}
+
+export function moveSeen(val) {
+    if (_secondsSeen + val > 0){
+        _secondsSeen += val
+    }
+    displayTimeline()
+}
+
+export function resetSeen() {
+    _secondsSeen = defaultSeen
 }
