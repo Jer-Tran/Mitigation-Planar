@@ -1,6 +1,7 @@
 import { getPartySize } from "./main.js"
 
 const defaultSeen = 180
+const paddingSeen = 20
 var _secondsSeen = defaultSeen
 var _start = 0
 var _instance
@@ -19,12 +20,6 @@ export function displayTimeline() {
     let width = tl.offsetWidth
     let px = 1
     setStyle("--timeslot-width", px + "px")
-    try {
-        console.log(Object.keys(_instance))
-    }
-    catch(error) {
-        console.log(error)
-    }
 
     tl.innerHTML = ""
     let t = document.createElement("table")
@@ -70,7 +65,15 @@ export function loadInstance(fname) {
 
     function loadInst(data) {
         _instance = data
-        _instLen = 0 // Do some calcs here
+        console.log(_instLen)
+        var keys = Object.keys(_instance)
+        keys.sort( function(a,b) { return (parseInt(a) - parseInt(b)) } )
+        console.log(keys)
+        _instLen = parseInt(keys[keys.length - 1])
+        resetSeen()
+        if (_secondsSeen > _instLen) {
+            _secondsSeen = _instLen + paddingSeen
+        }
         console.log(_instLen)
         displayTimeline()
     }
@@ -79,25 +82,31 @@ export function loadInstance(fname) {
         loadInst(inst)
     ).catch((error) => {
         console.log(error)
-      })
+    })
     
+}
+
+function checkStart() {
+    if (_start > _instLen) {
+        _start = _instLen
+    }
+
+    if (_start < 0) {
+        _start = 0
+    }
 }
 
 export function moveStart(val) {
     // Assume present state can see at least 1 mech
     
     _start = _start + val
-    if (_start < 0) {
-        _start = 0
-    }
+    checkStart()
     displayTimeline()
 }
 
 export function setStart(val) {
     _start = val
-    if (_start < 0) {
-        _start = 0
-    }
+    checkStart()
     displayTimeline()
 }
 
@@ -105,9 +114,13 @@ export function moveSeen(val) {
     if (_secondsSeen + val > 0){
         _secondsSeen += val
     }
+
+    if (_secondsSeen > _instLen + paddingSeen && _instance != null) {
+        _secondsSeen = _instLen + paddingSeen
+    }
     displayTimeline()
 }
 
 export function resetSeen() {
-    _secondsSeen = defaultSeen
+    _secondsSeen = defaultSeen + paddingSeen
 }

@@ -7,8 +7,12 @@
         "name": "boom2",
         "type": "phys"
     },
-    "100": {
+    "110": {
         "name": "final boom",
+        "type": "magic"
+    },
+    "75": {
+        "name": "random boom",
         "type": "magic"
     }
 }
