@@ -1,4 +1,4 @@
-import { getPartySize } from "./main.js"
+import { getPartySize, getCursor } from "./main.js"
 
 const defaultSeen = 180
 const paddingSeen = 20
@@ -7,7 +7,6 @@ var _start = 0
 var _instance
 var _instLen = 0
 var _mits = {}
-var _cur = 10
 
 function setStyle(attr, val) {
     var r = document.querySelector(':root')
@@ -21,6 +20,8 @@ export function displayTimeline() {
     let width = tl.offsetWidth
     let px = 1
     setStyle("--timeslot-width", px + "px")
+
+    let cur = getCursor()
 
     tl.innerHTML = ""
     let t = document.createElement("table")
@@ -49,9 +50,12 @@ export function displayTimeline() {
             }
             // If we are in the miti part of the timeline
             else {
-                // if (j % 20 > 0 && j % 20 < 10) {
-                //     td.style.backgroundColor = "lightblue"
-                // }
+                if (j == cur) {
+                    td.style.border = "1px solid black"
+                }
+                else if (j + 1 == cur) {
+                    td.style.borderRight = "1px solid black"
+                }
 
                 try {
                     let x = _mits[j][i][0]
@@ -88,11 +92,11 @@ export function loadInstance(fname) {
         console.log(keys)
         _instLen = parseInt(keys[keys.length - 1])
         resetSeen()
-        if (_secondsSeen > _instLen) {
-            _secondsSeen = _instLen + paddingSeen
-        }
+        // if (_secondsSeen > _instLen) {
+        //     _secondsSeen = _instLen + paddingSeen
+        // }
         console.log(_instLen)
-        displayTimeline()
+        // displayTimeline()
     }
 
     fetch(path).then(res => {return res.json();}).then(inst => 
@@ -140,6 +144,15 @@ export function moveSeen(val) {
 
 export function resetSeen() {
     _secondsSeen = defaultSeen + paddingSeen
+    try {
+        if (_secondsSeen > _instLen) {
+            _secondsSeen = _instLen + paddingSeen
+        }
+    }
+    catch { //pass 
+
+    }
+    displayTimeline()
 }
 
 export function addMiti(time, member, mit) {

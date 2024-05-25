@@ -5,9 +5,25 @@ import { displayTimeline, loadInstance, moveStart, setStart, moveSeen, resetSeen
 var _party = []
 var _partySize = 8
 var _instances = []
+var _cursor = 15
 
 export function getPartySize() {
     return _partySize
+}
+
+export function getCursor() {
+    return _cursor
+}
+
+function moveCursor(val) {
+    _cursor += val
+    if (_cursor < 0) {
+        _cursor = 0
+    }
+    // If going right hits hard limit, do nothing
+    // If going right and there's still stuff, also move the start by 1
+
+    displayTimeline()
 }
 
 function resetParty() {
@@ -85,7 +101,10 @@ function createMitsDiv(mits, member) {
     for (let i in mits) {
         let icon = mits[i].getIcon()
         // Thinking: should we entertain the case where we have multiple of the same mit, like 2 stacks of reprisal or something, for now no
-        icon.onclick = function() { addMiti(10, member, mits[i]) }
+        icon.onclick = function() { 
+            addMiti(_cursor, member, mits[i])
+            // Then do something to change the button's function or some way to remove mits
+        }
         el.appendChild(icon)
     }
 
@@ -243,7 +262,8 @@ function start(jobs, mits) {
     document.getElementById("scroll-right").onclick = function() { moveStart(1) }
     document.getElementById("zoom-less").onclick = function() { moveSeen(10) }
     document.getElementById("zoom-more").onclick = function() { moveSeen(-10) }
-    
+    document.getElementById("cursor-left").onclick = function() { moveCursor(-1) }
+    document.getElementById("cursor-right").onclick = function() { moveCursor(1) }
     test()
 }
 
