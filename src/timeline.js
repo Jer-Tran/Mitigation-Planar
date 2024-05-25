@@ -1,4 +1,4 @@
-import { getPartySize, getCursor } from "./main.js"
+import { getPartySize, getCursor, setCursor } from "./main.js"
 
 const defaultSeen = 180
 const paddingSeen = 20
@@ -11,6 +11,10 @@ var _mits = {}
 function setStyle(attr, val) {
     var r = document.querySelector(':root')
     r.style.setProperty(attr, val)
+}
+
+function resetMits() {
+    _mits = {}
 }
 
 export function displayTimeline() {
@@ -31,6 +35,7 @@ export function displayTimeline() {
         for (let j = _start; j < _secondsSeen + _start; j++) {
             let td = document.createElement("td")
             let d = document.createElement("div")
+            td.onclick = function() { setCursor(j); displayTimeline() }
             // Handling instance mechanics labelling
             if (i == -1) {
                 td.setAttribute("class", "mech")
@@ -91,12 +96,17 @@ export function loadInstance(fname) {
         keys.sort( function(a,b) { return (parseInt(a) - parseInt(b)) } )
         console.log(keys)
         _instLen = parseInt(keys[keys.length - 1])
+        resetMits()
         resetSeen()
         // if (_secondsSeen > _instLen) {
         //     _secondsSeen = _instLen + paddingSeen
         // }
         console.log(_instLen)
         // displayTimeline()
+        if (getCursor() > _secondsSeen) {
+            setCursor(_secondsSeen - 1)
+            displayTimeline()
+        }
     }
 
     fetch(path).then(res => {return res.json();}).then(inst => 

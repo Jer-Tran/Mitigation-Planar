@@ -15,6 +15,10 @@ export function getCursor() {
     return _cursor
 }
 
+export function setCursor(val) {
+    _cursor = val
+}
+
 function moveCursor(val) {
     _cursor += val
     if (_cursor < 0) {
