@@ -69,8 +69,6 @@ div {
     width: var(--timeslot-width);
     height: var(--icon-size);
     /* overflow: hidden; */
-    /* overflow-y: hidden; */
-    /* overflow-x: visible; */
     white-space: nowrap;
 }
 #timeline table {

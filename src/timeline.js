@@ -7,6 +7,7 @@ var _start = 0
 var _instance
 var _instLen = 0
 var _mits = {}
+var _cur = 10
 
 function setStyle(attr, val) {
     var r = document.querySelector(':root')
@@ -41,8 +42,24 @@ export function displayTimeline() {
                 catch {
                     // pass
                 }
+
                 if (j % 60 == 0) {
                     d.innerText += '\n' + '|'
+                }
+            }
+            // If we are in the miti part of the timeline
+            else {
+                // if (j % 20 > 0 && j % 20 < 10) {
+                //     td.style.backgroundColor = "lightblue"
+                // }
+
+                try {
+                    let x = _mits[j][i][0]
+                    d.innerHTML = x
+                    td.style.backgroundColor = "lightblue"
+                }
+                catch {
+                    // pass
                 }
             }
             // d.innerHTML = j
@@ -123,4 +140,35 @@ export function moveSeen(val) {
 
 export function resetSeen() {
     _secondsSeen = defaultSeen + paddingSeen
+}
+
+export function addMiti(time, member, mit) {
+    // Some check for no overlapping mits
+
+    // Make sure time slot exists
+    console.log(_mits)
+    try {
+        _mits[time][member]
+    }
+    catch {
+        _mits[time] = {}
+    }
+
+    // Make sure member exists
+    try { _mits[time][member][0]} // If there isn't an element then we should remake anyways then
+    catch {_mits[time][member] = []}
+    let x = mit.name
+    _mits[time][member].indexOf(x) === -1 ? _mits[time][member].push(x) : console.log("mit already exists")
+    // x = _mits[time][member]
+    // x = ["a", "b"]
+    // _mits[time][member] = ["a", "b"]
+    // _mits[time][member]
+    console.log(_mits)
+    // console.log(time + " " + member)
+    // console.log(mit)
+    displayTimeline()
+}
+
+export function removeMiti() {
+    console.log("x")
 }

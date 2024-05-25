@@ -1,6 +1,6 @@
 import { createJob, displayJobs, loadJobs } from "./jobs.js"
 import { loadMits } from "./mitigation.js"
-import { displayTimeline, loadInstance, moveStart, setStart, moveSeen } from "./timeline.js"
+import { displayTimeline, loadInstance, moveStart, setStart, moveSeen, resetSeen, addMiti, removeMiti } from "./timeline.js"
 
 var _party = []
 var _partySize = 8
@@ -79,11 +79,14 @@ function createLowerButtons(i) {
 }
 
 // Receives the list of mits
-function createMitsDiv(mits) {
+function createMitsDiv(mits, member) {
     let el = document.createElement("div")
     el.setAttribute("id", "miti-list")
     for (let i in mits) {
-        el.appendChild(mits[i].getIcon())
+        let icon = mits[i].getIcon()
+        // Thinking: should we entertain the case where we have multiple of the same mit, like 2 stacks of reprisal or something, for now no
+        icon.onclick = function() { addMiti(10, member, mits[i]) }
+        el.appendChild(icon)
     }
 
     return el
@@ -109,7 +112,7 @@ function displayParty() {
         let member = document.createElement("div")
 
         let lower = createLowerButtons(i)
-        let mits = createMitsDiv(_party[i].mits)
+        let mits = createMitsDiv(_party[i].mits, i)
         
         // All the appends
         member.appendChild(_party[i].getIcon())
