@@ -1,4 +1,4 @@
-import { getPartySize, getCursor, setCursor } from "./main.js"
+import { getPartySize, getCursor, setCursor, capCursor } from "./main.js"
 
 const defaultSeen = 180
 const paddingSeen = 20
@@ -50,7 +50,7 @@ export function displayTimeline() {
                 }
 
                 if (j % 60 == 0) {
-                    d.innerText += '\n' + '|'
+                    d.innerText += '\n' + '|' // Checkout gradient borders later for a better way to do this
                 }
             }
             // If we are in the miti part of the timeline
@@ -132,13 +132,19 @@ export function moveStart(val) {
     
     _start = _start + val
     checkStart()
+    capCursor()
     displayTimeline()
 }
 
 export function setStart(val) {
     _start = val
     checkStart()
+    capCursor()
     displayTimeline()
+}
+
+export function getStart() {
+    return _start
 }
 
 export function moveSeen(val) {
@@ -149,6 +155,7 @@ export function moveSeen(val) {
     if (_secondsSeen > _instLen + paddingSeen && _instance != null) {
         _secondsSeen = _instLen + paddingSeen
     }
+    capCursor()
     displayTimeline()
 }
 
@@ -194,4 +201,21 @@ export function addMiti(time, member, mit) {
 
 export function removeMiti() {
     console.log("x")
+}
+
+// Considering simplifying it to getting the mits at a specific time-slice
+export function getMits() {
+    return _mits
+}
+
+export function checkInView(time) {
+    return (time >= _start && time < _secondsSeen + _start)
+}
+
+export function getViewLimit() {
+    return _instLen + paddingSeen
+}
+
+export function getViewEnd() {
+    return _start + _secondsSeen
 }

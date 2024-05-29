@@ -1,6 +1,6 @@
 import { createJob, displayJobs, loadJobs } from "./jobs.js"
 import { loadMits } from "./mitigation.js"
-import { displayTimeline, loadInstance, moveStart, setStart, moveSeen, resetSeen, addMiti, removeMiti } from "./timeline.js"
+import { displayTimeline, loadInstance, moveStart, setStart, getStart, moveSeen, resetSeen, addMiti, removeMiti, checkInView, getViewLimit, getViewEnd } from "./timeline.js"
 
 var _party = []
 var _partySize = 8
@@ -17,6 +17,24 @@ export function getCursor() {
 
 export function setCursor(val) {
     _cursor = val
+    displayTimeline()
+}
+
+export function capCursor() {
+    let limit = getViewLimit()
+
+    if (_cursor >= limit && limit != 20) {
+        _cursor = getViewLimit() - 1
+    }
+
+    // Something something ensure the cursor is always in view
+    if (_cursor > getViewEnd() && limit != 20) {
+        _cursor = getViewEnd()
+    }
+
+    if (_cursor < getStart()) {
+        _cursor = getStart()
+    }
 }
 
 function moveCursor(val) {
@@ -24,9 +42,13 @@ function moveCursor(val) {
     if (_cursor < 0) {
         _cursor = 0
     }
-    // If going right hits hard limit, do nothing
-    // If going right and there's still stuff, also move the start by 1
 
+    let limit = getViewLimit()
+    // If cursor moves and there's still stuff, also move the start
+    if (!checkInView(_cursor) && _cursor < limit) {
+        moveStart(val)
+    }
+    capCursor()
     displayTimeline()
 }
 
@@ -109,6 +131,7 @@ function createMitsDiv(mits, member) {
             addMiti(_cursor, member, mits[i])
             // Then do something to change the button's function or some way to remove mits
         }
+        // Add an ondrag event, so we can place mits on timeline using this
         el.appendChild(icon)
     }
 
@@ -266,6 +289,7 @@ function start(jobs, mits) {
     document.getElementById("scroll-right").onclick = function() { moveStart(1) }
     document.getElementById("zoom-less").onclick = function() { moveSeen(10) }
     document.getElementById("zoom-more").onclick = function() { moveSeen(-10) }
+    document.getElementById("cursor-reset").onclick = function() { setCursor(0) }
     document.getElementById("cursor-left").onclick = function() { moveCursor(-1) }
     document.getElementById("cursor-right").onclick = function() { moveCursor(1) }
     test()
