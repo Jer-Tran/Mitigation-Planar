@@ -11,6 +11,10 @@ export function getPartySize() {
     return _partySize
 }
 
+export function getParty() {
+    return _party
+}
+
 export function getCursor() {
     return _cursor
 }
@@ -128,8 +132,10 @@ function createMitsDiv(mits, member) {
         let icon = mits[i].getIcon()
         // Thinking: should we entertain the case where we have multiple of the same mit, like 2 stacks of reprisal or something, for now no
         icon.onclick = function() { 
-            addMiti(_cursor, member, mits[i])
+            // addMiti(_cursor, member, mits[i])
             // Then do something to change the button's function or some way to remove mits
+            mits[i].insertCast(_cursor)
+            displayTimeline()
         }
         // Add an ondrag event, so we can place mits on timeline using this
         el.appendChild(icon)
@@ -137,6 +143,7 @@ function createMitsDiv(mits, member) {
 
     return el
 }
+
 
 function updateDisplay() {
     displayParty()
@@ -176,7 +183,7 @@ function displayIcons() {
     // -1 to leave space for timeline mechanics
     for (let i = -1; i < _partySize; i++) {
         let r = document.createElement("tr")
-        let d = document.createElement("td")
+        let d = document.createElement("td") // TODO: Add something to adjust the heights based on the number of mits
         let slot = document.createElement("div")
         try {
             slot.appendChild(_party[i].getIcon())

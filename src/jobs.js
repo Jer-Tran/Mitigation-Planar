@@ -37,6 +37,14 @@ class Job {
         }
         return x
     }
+
+    getMits() {
+        return this.mits
+    }
+
+    getNumActiveMits() {
+        return this.mits.length
+    }
 }
 
 function createMitList(mits) {

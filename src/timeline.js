@@ -1,11 +1,11 @@
-import { getPartySize, getCursor, setCursor, capCursor } from "./main.js"
+import { getPartySize, getParty, getCursor, setCursor, capCursor } from "./main.js"
 
 const defaultSeen = 240
 const paddingSeen = 20
 var _secondsSeen = defaultSeen
 var _start = 0
 var _instance
-var _instLen = 0
+var _instLen = defaultSeen + paddingSeen
 var _mits = {}
 
 function setStyle(attr, val) {
@@ -33,15 +33,17 @@ export function displayTimeline() {
     
     tl.innerHTML = ""
     let t = document.createElement("table")
+    let p = getParty()
+    t.setAttribute("id", "table")
     // -1 to leave space for timeline mechanics
     for (let i = -1; i < getPartySize(); i++) {
         let r = document.createElement("tr")
-        for (let j = _start; j < _secondsSeen + _start; j++) {
+        for (let j = _start; j < _instLen + paddingSeen; j++) {
             let td = document.createElement("td")
-            let d = document.createElement("div")
             td.onclick = function() { setCursor(j); displayTimeline() }
             // Handling instance mechanics labelling
             if (i == -1) {
+                let d = document.createElement("div")
                 td.setAttribute("class", "mech")
                 td.style.border = 'none'
                 try {
@@ -56,8 +58,9 @@ export function displayTimeline() {
                 if (j % 60 == 0) {
                     d.innerText += '\n' + '|' // Checkout gradient borders later for a better way to do this
                 }
+                td.appendChild(d)
             }
-            // If we are in the miti part of the timeline
+            // Only caring about 
             else {
                 if (j == cur) {
                     td.style.border = "1px solid black"
@@ -65,35 +68,39 @@ export function displayTimeline() {
                 else if (j + 1 == cur) {
                     td.style.borderRight = "1px solid black"
                 }
-                
-                try {
-                    const keys = Object.keys(_mits[j][i])
-                    let x = keys[0] // Add something later to get a prio, and multiple mits
-                    let state = _mits[j][i][x]['active']
-                    if (state == 0) {
-                        d.innerHTML = x
-                    }
-                    if (state < 2) {
-                        d.style.backgroundColor = "lightblue"
-                    }
-                    else if (state == 2) {
-                        d.style.backgroundColor = "darkblue"
-                    }
-
-                    // For loop for each mit of the job
-                    // let aa =document.createElement("div")
-                    // td.appendChild(aa)
-                }
-                catch {
-                    // pass
-                }
             }
             // d.innerHTML = j
-            td.appendChild(d)
             r.appendChild(td)
         }
+        // Get mitlist for ith party member
+        try {
+            let mitList = p[i].getMits()
+            for (var id in mitList) {
+                // Get the id'th mit
+                let mit = mitList[id]
+                // Need to do something so that layered mits don't hide each other
+                for (var id2 in mit.casts) {
+                    // For each time it's casted, insert into tr
+                    let t = mit.casts[id2]
+                    let d = document.createElement("div")
+                    d.innerText = mit.name + "\n"
+                    d.style.width = (mit.duration * px) + "px"
+                    d.style.backgroundColor = "skyblue"
+
+                    // Something that checks r.children.item(t) 's num of children and compare that with id, filling if not sufficient
+                    r.children.item(t).appendChild(d)
+                }
+            }
+            // TODO: Something to call the party side icons to redraw based on height
+        }
+        catch { // pass 
+
+        }
+        
+
         t.appendChild(r)
     }
+
     tl.appendChild(t)
 
 

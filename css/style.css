@@ -83,6 +83,7 @@ div {
 #timeline tr {
     border: 1px solid;
     height: var(--icon-size);
+    vertical-align: top;
 }
 #timeline td {
     /* border: 1px solid lightgrey; */
@@ -91,6 +92,10 @@ div {
     width: var(--timeslot-width);
     height: var(--icon-size);
     overflow-x: hidden;
+}
+#table {
+    margin-left: -30px;
+    height: inherit;
 }
 .mech {
     /* Figure out how to make this prio later */

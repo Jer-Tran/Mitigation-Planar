@@ -11,6 +11,7 @@ class Mitigation {
         this.magic = magic
         this.heal = heal
         this.shield = shield
+        this.casts = []
     }
 
     toString() {
@@ -22,6 +23,25 @@ class Mitigation {
         img.src = this.icon
         img.alt = this.displayName
         return img
+    }
+
+    insertCast(t) {
+        // Some checks before/after cast point to remove overlapping casts
+        this.casts.push(t)
+    }
+
+    removeCast(t) {
+        var index = -1
+        for (let i in this.casts) {
+            if (this.casts[i] == t) {
+                index = i
+                break
+            }
+        }
+
+        if (index != -1) {
+            this.casts.splice(index, 1)
+        }
     }
 }
 
