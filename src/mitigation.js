@@ -1,10 +1,12 @@
 var _mits
 
 class Mitigation {
-    constructor(name, displayName, icon, phys, magic, heal, shield) {
+    constructor(name, displayName, icon, duration, cooldown, phys, magic, heal, shield) {
         this.name = name
         this.displayName = displayName
         this.icon = icon
+        this.duration = duration
+        this.cooldown = cooldown
         this.phys = phys
         this.magic = magic
         this.heal = heal
@@ -27,7 +29,7 @@ export function createMiti(name) {
     for (let i in _mits) {
         if (_mits[i].name == name) {
             let m = _mits[i]
-            var x = new Mitigation(m.name, m.display_name, m.icon, m.phys, m.magic, m.heal, m.shield)
+            var x = new Mitigation(m.name, m.display_name, m.icon, m.duration, m.cooldown, m.phys, m.magic, m.heal, m.shield)
             return x
         }
     }

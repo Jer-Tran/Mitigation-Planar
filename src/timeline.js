@@ -1,6 +1,6 @@
 import { getPartySize, getCursor, setCursor, capCursor } from "./main.js"
 
-const defaultSeen = 180
+const defaultSeen = 240
 const paddingSeen = 20
 var _secondsSeen = defaultSeen
 var _start = 0
@@ -18,15 +18,19 @@ function resetMits() {
 }
 
 export function displayTimeline() {
+    // What if instead of all this bs, we just always render the entire fight, but shift the view
+    // Zoom in/out is just affecting the timeslot width, while scrolling changes the offset position/margin/idk
+    // This function would solely work to re-render the timeline if any of its contents change, while the other stuff can just affect style(?)
+
     let tl = document.getElementById("timeline")
     // I've lost the sauce with what I was doing here, so just a reminder for myself that this is about setting inner div sizes to balance so that we still see enough of the timeline
     // Maybe set it to a multiplier down the line
     let width = tl.offsetWidth
-    let px = 1
+    let px = width / _secondsSeen
     setStyle("--timeslot-width", px + "px")
 
     let cur = getCursor()
-
+    
     tl.innerHTML = ""
     let t = document.createElement("table")
     // -1 to leave space for timeline mechanics
@@ -48,7 +52,7 @@ export function displayTimeline() {
                 catch {
                     // pass
                 }
-
+                
                 if (j % 60 == 0) {
                     d.innerText += '\n' + '|' // Checkout gradient borders later for a better way to do this
                 }
@@ -61,11 +65,24 @@ export function displayTimeline() {
                 else if (j + 1 == cur) {
                     td.style.borderRight = "1px solid black"
                 }
-
+                
                 try {
-                    let x = _mits[j][i][0]
-                    d.innerHTML = x
-                    td.style.backgroundColor = "lightblue"
+                    const keys = Object.keys(_mits[j][i])
+                    let x = keys[0] // Add something later to get a prio, and multiple mits
+                    let state = _mits[j][i][x]['active']
+                    if (state == 0) {
+                        d.innerHTML = x
+                    }
+                    if (state < 2) {
+                        d.style.backgroundColor = "lightblue"
+                    }
+                    else if (state == 2) {
+                        d.style.backgroundColor = "darkblue"
+                    }
+
+                    // For loop for each mit of the job
+                    // let aa =document.createElement("div")
+                    // td.appendChild(aa)
                 }
                 catch {
                     // pass
@@ -78,6 +95,8 @@ export function displayTimeline() {
         t.appendChild(r)
     }
     tl.appendChild(t)
+
+
 }
 
 function doError(msg) {
@@ -88,7 +107,7 @@ export function loadInstance(fname) {
     // Something that prevents interaction while loading
     const path = "./instances/" + fname
     console.log("path is " + path)
-
+    
     function loadInst(data) {
         _instance = data
         console.log(_instLen)
@@ -172,23 +191,54 @@ export function resetSeen() {
     displayTimeline()
 }
 
+function checkTimeSlot(t, m) {
+    try {
+        _mits[t][m]
+    }
+    catch {
+        _mits[t] = {}
+    }
+
+    // Make sure member exists
+    try { _mits[t][m][0]} // If there isn't an element then we should remake anyways then
+    catch {_mits[t][m] = {}}
+}
+
 export function addMiti(time, member, mit) {
     // Some check for no overlapping mits
 
     // Make sure time slot exists
     console.log(_mits)
-    try {
-        _mits[time][member]
-    }
-    catch {
-        _mits[time] = {}
+    checkTimeSlot(time, member)
+
+    let fx = function(dur, cd, m) {
+        let i = 0
+        console.log("len = " + dur)
+        while (i < dur) {
+            let t = time + i
+            checkTimeSlot(t, member)
+            _mits[t][member][m] = {"active": 1, "origin": time}
+            i += 1
+        }
+        _mits[time][member][m]["active"] = 0
+
+        while (i < cd) {
+            let t = time + i
+            checkTimeSlot(t, member)
+            _mits[t][member][m] = {"active": 2, "origin": time}
+            i += 1
+        }
     }
 
-    // Make sure member exists
-    try { _mits[time][member][0]} // If there isn't an element then we should remake anyways then
-    catch {_mits[time][member] = []}
     let x = mit.name
-    _mits[time][member].indexOf(x) === -1 ? _mits[time][member].push(x) : console.log("mit already exists")
+    try {
+        _mits[time][member][x]["active"]
+        console.log("mit already exists")
+    }
+    catch {
+        fx(mit.duration, mit.cooldown, x)
+    }
+    // _mits[time][member].indexOf(x) === -1 ? fx(mit.duration, x) : console.log("mit already exists")
     // x = _mits[time][member]
     // x = ["a", "b"]
     // _mits[time][member] = ["a", "b"]

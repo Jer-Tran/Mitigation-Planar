@@ -66,9 +66,11 @@ div {
 #timeline div {
     border: none;
     margin: 0;
-    width: var(--timeslot-width);
+    width: inherit;
+    /* width: 1000px; */
+    /* position: inherit; */
     height: var(--icon-size);
-    /* overflow: hidden; */
+    overflow:visible;
     white-space: nowrap;
 }
 #timeline table {
@@ -76,16 +78,18 @@ div {
     border-collapse: collapse;
     height:100%;
     width: 100%;
+    table-layout: fixed;
 }
 #timeline tr {
     border: 1px solid;
     height: var(--icon-size);
 }
 #timeline td {
-    border: 1px solid lightgrey;
+    /* border: 1px solid lightgrey; */
+    padding: 0;
     /* border: none; */
-    height: var(--icon-size);
     width: var(--timeslot-width);
+    height: var(--icon-size);
     overflow-x: hidden;
 }
 .mech {
