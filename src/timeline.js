@@ -86,6 +86,8 @@ export function displayTimeline() {
                     d.innerText = mit.name + "\n"
                     d.style.width = (mit.duration * px) + "px"
                     d.style.backgroundColor = "skyblue"
+                    d.className = "no-right-click"
+                    d.addEventListener('contextmenu', function() {mit.removeCast(t); return false;})
 
                     // Something that checks r.children.item(t) 's num of children and compare that with id, filling if not sufficient
                     r.children.item(t).appendChild(d)

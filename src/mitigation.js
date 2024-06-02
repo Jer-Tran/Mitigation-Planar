@@ -1,3 +1,5 @@
+import { displayTimeline } from "./timeline.js"
+
 var _mits
 
 class Mitigation {
@@ -42,6 +44,7 @@ class Mitigation {
         if (index != -1) {
             this.casts.splice(index, 1)
         }
+        displayTimeline()
     }
 }
 
