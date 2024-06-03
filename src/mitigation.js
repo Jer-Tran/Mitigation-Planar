@@ -1,5 +1,3 @@
-import { displayTimeline } from "./timeline.js"
-
 var _mits
 
 class Mitigation {
@@ -29,6 +27,15 @@ class Mitigation {
 
     insertCast(t) {
         // Some checks before/after cast point to remove overlapping casts
+        var newCasts = []
+        for (let i in this.casts) {
+            let diff = Math.abs(t - this.casts[i])
+            if (diff >= this.cooldown) {
+                newCasts.push(this.casts[i])
+            }
+        }
+        this.casts = newCasts
+
         this.casts.push(t)
     }
 
@@ -44,7 +51,6 @@ class Mitigation {
         if (index != -1) {
             this.casts.splice(index, 1)
         }
-        displayTimeline()
     }
 }
 
