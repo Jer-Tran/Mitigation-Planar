@@ -82,11 +82,8 @@ export function displayTimeline() {
                 for (var id2 in mit.casts) {
                     // For each time it's casted, insert into tr
                     let t = mit.casts[id2]
-                    let d = document.createElement("div")
-                    d.innerText = mit.name + "\n"
-                    d.style.width = (mit.duration * px) + "px"
-                    d.style.backgroundColor = "skyblue"
-                    d.className = "no-right-click"
+                    let d = createMitDiv(mit, px)
+                    d.classList.add("no-right-click")
                     d.addEventListener('contextmenu', function() {mit.removeCast(t); displayTimeline(); return false;})
 
                     // Something that checks r.children.item(t) 's num of children and compare that with id, filling if not sufficient
@@ -95,17 +92,31 @@ export function displayTimeline() {
             }
             // TODO: Something to call the party side icons to redraw based on height
         }
-        catch { // pass 
-
+        catch(error) { // pass
         }
-        
-
         t.appendChild(r)
     }
-
     tl.appendChild(t)
+}
 
+function createMitDiv(mit, width) {
+    let d = document.createElement("div")
+    d.classList.add("cast")
+    let dur = document.createElement("div")
+    let cd = document.createElement("div")
+    dur.innerText = mit.name + "\n"
+    dur.style.width = (mit.duration * width) + "px"
+    dur.style.height = "20px"
+    dur.style.backgroundColor = "skyblue"
 
+    cd.style.width = (mit.cooldown * width) + "px"
+    cd.style.height = "20px"
+    cd.style.backgroundColor = "grey"
+    cd.style.zIndex = "-2"
+
+    d.appendChild(dur)
+    d.appendChild(cd)
+    return d
 }
 
 function doError(msg) {
