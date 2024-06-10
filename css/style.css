@@ -2,6 +2,7 @@
     --icon-size: 30px;
     --timeline-width: 100%;
     --timeslot-width: 30px;
+    --row-height: 50px;
 }
 div {
     border: 1px solid;
@@ -69,7 +70,6 @@ div {
     width: inherit;
     /* width: 1000px; */
     /* position: inherit; */
-    height: var(--icon-size);
     overflow:visible;
     white-space: nowrap;
 }
@@ -82,7 +82,7 @@ div {
 }
 #timeline tr {
     border: 1px solid;
-    height: var(--icon-size);
+    height: var(--row-height);
     vertical-align: top;
 }
 #timeline td {
@@ -90,7 +90,7 @@ div {
     padding: 0;
     /* border: none; */
     width: var(--timeslot-width);
-    height: var(--icon-size);
+    /* height: var(--icon-size); */
     overflow-x: hidden;
 }
 #table {
@@ -131,6 +131,9 @@ div {
 .flex {
     display: flex;
     justify-content: center;
+}
+.cast {
+    position: absolute;
 }
 .cast * {
     position: absolute;

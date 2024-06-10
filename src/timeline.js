@@ -7,11 +7,14 @@ var _start = 0
 var _instance
 var _instLen = defaultSeen + paddingSeen
 var _mits = {}
+var _rowHeight = 39
 
 function setStyle(attr, val) {
     var r = document.querySelector(':root')
     r.style.setProperty(attr, val)
 }
+
+setStyle("--row-height", (_rowHeight + 1) + "px")
 
 function resetMits() {
     _mits = {}
@@ -82,7 +85,7 @@ export function displayTimeline() {
                 for (var id2 in mit.casts) {
                     // For each time it's casted, insert into tr
                     let t = mit.casts[id2]
-                    let d = createMitDiv(mit, px)
+                    let d = createMitDiv(mit, px, p[i].getNumMits(), p[i].getMitIndex(mit.name))
                     d.classList.add("no-right-click")
                     d.addEventListener('contextmenu', function() {mit.removeCast(t); displayTimeline(); return false;})
 
@@ -99,18 +102,22 @@ export function displayTimeline() {
     tl.appendChild(t)
 }
 
-function createMitDiv(mit, width) {
+function createMitDiv(mit, width, numMits, offset) {
     let d = document.createElement("div")
     d.classList.add("cast")
+    var castHeight = _rowHeight / numMits
+    d.style.height = castHeight + "px"
+    d.style.marginTop = castHeight * offset + "px"
+
     let dur = document.createElement("div")
     let cd = document.createElement("div")
     dur.innerText = mit.name + "\n"
     dur.style.width = (mit.duration * width) + "px"
-    dur.style.height = "20px"
+    dur.style.height = "inherit"
     dur.style.backgroundColor = "skyblue"
 
     cd.style.width = (mit.cooldown * width) + "px"
-    cd.style.height = "20px"
+    cd.style.height = "inherit"
     cd.style.backgroundColor = "grey"
     cd.style.zIndex = "-2"
 

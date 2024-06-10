@@ -42,8 +42,17 @@ class Job {
         return this.mits
     }
 
-    getNumActiveMits() {
+    getNumMits() {
         return this.mits.length
+    }
+
+    getMitIndex(name) {
+        for (let i in this.mits) {
+            if (this.mits[i].name == name) {
+                return i
+            }
+        }
+        return -1
     }
 }
 
