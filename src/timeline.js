@@ -7,7 +7,7 @@ var _start = 0
 var _instance
 var _instLen = defaultSeen + paddingSeen
 var _mits = {}
-var _rowHeight = 39
+var _rowHeight = 49
 
 function setStyle(attr, val) {
     var r = document.querySelector(':root')
@@ -67,6 +67,7 @@ export function displayTimeline() {
             else {
                 if (j == cur) {
                     td.style.border = "1px solid black"
+                    td.classList.add("selected")
                 }
                 else if (j + 1 == cur) {
                     td.style.borderRight = "1px solid black"
@@ -115,11 +116,12 @@ function createMitDiv(mit, width, numMits, offset) {
     dur.style.width = (mit.duration * width) + "px"
     dur.style.height = "inherit"
     dur.style.backgroundColor = "skyblue"
+    dur.style.zIndex = "-2"
 
     cd.style.width = (mit.cooldown * width) + "px"
     cd.style.height = "inherit"
     cd.style.backgroundColor = "grey"
-    cd.style.zIndex = "-2"
+    cd.style.zIndex = "-4"
 
     d.appendChild(dur)
     d.appendChild(cd)

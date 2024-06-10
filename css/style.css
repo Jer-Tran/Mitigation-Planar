@@ -67,7 +67,7 @@ div {
 #timeline div {
     border: none;
     margin: 0;
-    width: inherit;
+    /* width: inherit; */
     /* width: 1000px; */
     /* position: inherit; */
     overflow:visible;
@@ -94,8 +94,13 @@ div {
     overflow-x: hidden;
 }
 #table {
-    margin-left: -30px;
+    /* margin-left: -30px; */
     height: inherit;
+}
+.selected {
+    background-color: whitesmoke;
+    position:relative;
+    z-index: -5;
 }
 .mech {
     /* Figure out how to make this prio later */
