@@ -63,7 +63,7 @@ export function displayTimeline() {
                 }
                 td.appendChild(d)
             }
-            // Only caring about 
+            // In standard table
             else {
                 if (j == cur) {
                     td.style.border = "1px solid black"
@@ -72,6 +72,26 @@ export function displayTimeline() {
                 else if (j + 1 == cur) {
                     td.style.borderRight = "1px solid black"
                 }
+                
+                // // Get mitlist for ith party member
+                // try {
+                //     let mitList = p[i].getMits()
+                //     // For each mit
+                //     for (let id in mitList) {
+                //         let mit = mitList[id]
+                //         if (mit.casts.includes(j)) {
+                //             let d = createMitDiv(mit, px, p[i].getNumMits(), p[i].getMitIndex(mit.name))
+                //             d.classList.add("no-right-click")
+                //             d.addEventListener('contextmenu', function() {mit.removeCast(j); displayTimeline(); return false;})
+                //             td.appendChild(d)
+                //             console.log("added")
+                //         }
+                //     }
+                //     console.log("no err")
+                // }
+                // catch(error) { 
+                //     if (i==0) console.log(error)
+                // } // pass
             }
             // d.innerHTML = j
             r.appendChild(td)
@@ -83,14 +103,20 @@ export function displayTimeline() {
                 // Get the id'th mit
                 let mit = mitList[id]
                 // Need to do something so that layered mits don't hide each other
-                for (var id2 in mit.casts) {
+                for (var x in mit.casts) {
                     // For each time it's casted, insert into tr
-                    let t = mit.casts[id2]
+                    let t = mit.casts[x]
                     let d = createMitDiv(mit, px, p[i].getNumMits(), p[i].getMitIndex(mit.name))
                     d.classList.add("no-right-click")
                     d.addEventListener('contextmenu', function() {mit.removeCast(t); displayTimeline(); return false;})
 
-                    // Something that checks r.children.item(t) 's num of children and compare that with id, filling if not sufficient
+                    while (r.children.item(t).childElementCount < id) {
+                        let y = document.createElement("div")
+                        y.classList.add("cast")
+                        y.style.width = "100%"
+                        y.style.height = _rowHeight / p[i].getNumMits()
+                        r.children.item(t).appendChild(y)
+                    }
                     r.children.item(t).appendChild(d)
                 }
             }
@@ -100,7 +126,12 @@ export function displayTimeline() {
         }
         t.appendChild(r)
     }
+    let _x = document.createElement("tr")
+    _x.style.height = "50px"
+    _x.innerHTML = " "
+    // t.appendChild(_x)
     tl.appendChild(t)
+    console.log(p)
 }
 
 function createMitDiv(mit, width, numMits, offset) {
@@ -108,7 +139,7 @@ function createMitDiv(mit, width, numMits, offset) {
     d.classList.add("cast")
     var castHeight = _rowHeight / numMits
     d.style.height = castHeight + "px"
-    d.style.marginTop = castHeight * offset + "px"
+    // d.style.marginTop = castHeight * offset + "px"
 
     let dur = document.createElement("div")
     let cd = document.createElement("div")
@@ -116,12 +147,12 @@ function createMitDiv(mit, width, numMits, offset) {
     dur.style.width = (mit.duration * width) + "px"
     dur.style.height = "inherit"
     dur.style.backgroundColor = "skyblue"
-    dur.style.zIndex = "-2"
+    dur.style.zIndex = "-3"
 
     cd.style.width = (mit.cooldown * width) + "px"
     cd.style.height = "inherit"
     cd.style.backgroundColor = "grey"
-    cd.style.zIndex = "-4"
+    cd.style.zIndex = "-5"
 
     d.appendChild(dur)
     d.appendChild(cd)

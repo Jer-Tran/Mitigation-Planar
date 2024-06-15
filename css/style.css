@@ -61,7 +61,8 @@ div {
 }
 #timeline {
     width: var(--timeline-width);
-    overflow: hidden;
+    overflow: auto;
+    overflow-y: hidden;
     font-size: 12px;
 }
 #timeline div {
@@ -70,7 +71,7 @@ div {
     /* width: inherit; */
     /* width: 1000px; */
     /* position: inherit; */
-    overflow:visible;
+    /* overflow:visible; */
     white-space: nowrap;
 }
 #timeline table {
@@ -138,8 +139,15 @@ div {
     justify-content: center;
 }
 .cast {
-    position: absolute;
+    /* display: inline-block; */
+    position: relative;
+    overflow: none;
 }
 .cast * {
+    /* display:inline; */
     position: absolute;
+    overflow: none;
+}
+.small-icon {
+    width: var(--icon-size);
 }
