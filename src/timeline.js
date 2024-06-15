@@ -106,7 +106,8 @@ export function displayTimeline() {
                 for (var x in mit.casts) {
                     // For each time it's casted, insert into tr
                     let t = mit.casts[x]
-                    let d = createMitDiv(mit, px, p[i].getNumMits(), p[i].getMitIndex(mit.name))
+                    let numMits = p[i].getNumMits()
+                    let d = createMitDiv(mit, px, numMits, p[i].getMitIndex(mit.name))
                     d.classList.add("no-right-click")
                     d.addEventListener('contextmenu', function() {mit.removeCast(t); displayTimeline(); return false;})
 
@@ -114,7 +115,8 @@ export function displayTimeline() {
                         let y = document.createElement("div")
                         y.classList.add("cast")
                         y.style.width = "100%"
-                        y.style.height = _rowHeight / p[i].getNumMits()
+                        y.style.height = _rowHeight / numMits + "px"
+                        y.innerHTML = " "
                         r.children.item(t).appendChild(y)
                     }
                     r.children.item(t).appendChild(d)
@@ -126,10 +128,6 @@ export function displayTimeline() {
         }
         t.appendChild(r)
     }
-    let _x = document.createElement("tr")
-    _x.style.height = "50px"
-    _x.innerHTML = " "
-    // t.appendChild(_x)
     tl.appendChild(t)
     console.log(p)
 }
@@ -144,7 +142,7 @@ function createMitDiv(mit, width, numMits, offset) {
     let dur = document.createElement("div")
     let cd = document.createElement("div")
     dur.innerText = mit.name + "\n"
-    dur.style.width = (mit.duration * width) + "px"
+    dur.style.width = (mit.duration * width) + "px"  // TODO: Something to manipulate the widths to cap out if it were to go over
     dur.style.height = "inherit"
     dur.style.backgroundColor = "skyblue"
     dur.style.zIndex = "-3"
