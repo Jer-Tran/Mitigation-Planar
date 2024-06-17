@@ -14,5 +14,9 @@
     "75": {
         "name": "random boom",
         "type": "magic"
+    },
+    "300": {
+        "name": "enrage",
+        "type": "phys"
     }
 }

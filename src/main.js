@@ -292,7 +292,8 @@ function start(jobs, mits) {
     updateDisplay()
 
     // document.getElementById("scroll-left").onclick = function() { moveStart(-1) }
-    document.getElementById("scroll-start").onclick = function() { setStart(0); resetSeen() }
+    // document.getElementById("scroll-start").onclick = function() { setStart(0); resetSeen() }
+    document.getElementById("scroll-start").onclick = function() { resetSeen() }
     // document.getElementById("scroll-left").onmousedown = (function() { moveStart(-1) })
     // document.getElementById("scroll-right").onclick = function() { moveStart(1) }
     document.getElementById("zoom-less").onclick = function() { moveSeen(10) }

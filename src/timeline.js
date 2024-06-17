@@ -107,7 +107,7 @@ export function displayTimeline() {
                     // For each time it's casted, insert into tr
                     let t = mit.casts[x]
                     let numMits = p[i].getNumMits()
-                    let d = createMitDiv(mit, px, numMits, p[i].getMitIndex(mit.name))
+                    let d = createMitDiv(mit, px, numMits, t)
                     d.classList.add("no-right-click")
                     d.addEventListener('contextmenu', function() {mit.removeCast(t); displayTimeline(); return false;})
 
@@ -132,7 +132,7 @@ export function displayTimeline() {
     console.log(p)
 }
 
-function createMitDiv(mit, width, numMits, offset) {
+function createMitDiv(mit, width, numMits, t) {
     let d = document.createElement("div")
     d.classList.add("cast")
     var castHeight = _rowHeight / numMits
@@ -141,13 +141,19 @@ function createMitDiv(mit, width, numMits, offset) {
 
     let dur = document.createElement("div")
     let cd = document.createElement("div")
-    dur.innerText = mit.name + "\n"
-    dur.style.width = (mit.duration * width) + "px"  // TODO: Something to manipulate the widths to cap out if it were to go over
+    let sp = document.createElement("span")
+    sp.innerText = mit.name
+    
+    // manipulates the widths to cap out if it were to go over
+    var _w = Math.min(mit.duration, _instLen + paddingSeen - t) * width
+    dur.style.width = _w + "px"
     dur.style.height = "inherit"
     dur.style.backgroundColor = "skyblue"
     dur.style.zIndex = "-3"
+    dur.appendChild(sp)
 
-    cd.style.width = (mit.cooldown * width) + "px"
+    _w = Math.min(mit.cooldown, _instLen + paddingSeen - t) * width
+    cd.style.width = _w + "px"
     cd.style.height = "inherit"
     cd.style.backgroundColor = "grey"
     cd.style.zIndex = "-5"
