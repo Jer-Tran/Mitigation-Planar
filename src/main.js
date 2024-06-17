@@ -268,6 +268,16 @@ function generateInstanceList() {
     ).catch((error) => { console.log(error) })
 }
 
+function toggleElementDisplay(id, dis) {
+    let el = document.getElementById(id)
+    if (el.style.display === "none") {
+        el.style.display = dis
+    }
+    else {
+        el.style.display = "none"
+    }
+}
+
 function test() {
     // console.log(_party)
     // addMember('paladin')
@@ -301,6 +311,7 @@ function start(jobs, mits) {
     document.getElementById("cursor-reset").onclick = function() { setCursor(0) }
     document.getElementById("cursor-left").onclick = function() { moveCursor(-1) }
     document.getElementById("cursor-right").onclick = function() { moveCursor(1) }
+    document.getElementById("toggle-jobs").onclick = function() { toggleElementDisplay("jobs", "flex") }
     test()
 }
 
