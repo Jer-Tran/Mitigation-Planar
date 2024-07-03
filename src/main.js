@@ -154,10 +154,6 @@ function updateDisplay() {
 function displayParty() {
     let party = document.getElementById("party")
     party.innerHTML = "";
-    let reset = document.createElement("div")
-    reset.innerHTML = "reset button"
-    reset.onclick = resetParty
-    party.appendChild(reset)
     let plist = document.createElement("div")
     plist.setAttribute("id", "party-list")
     for (let i in _party) {
@@ -312,6 +308,7 @@ function start(jobs, mits) {
     document.getElementById("cursor-left").onclick = function() { moveCursor(-1) }
     document.getElementById("cursor-right").onclick = function() { moveCursor(1) }
     document.getElementById("toggle-jobs").onclick = function() { toggleElementDisplay("jobs", "flex") }
+    document.getElementById("reset-button").onclick = resetParty
     test()
 }
 
