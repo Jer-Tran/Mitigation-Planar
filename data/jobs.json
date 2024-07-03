@@ -6,7 +6,8 @@
             "icon": "https://lds-img.finalfantasyxiv.com/promo/h/V/NUXU4h6iXzF8HS4BxHKYf7vOa0.png",
             "mits": [
                 "reprisal",
-                "divineveil"
+                "divineveil",
+                "passageofarms"
             ]
         },
         {
@@ -14,7 +15,8 @@
             "role": "tank",
             "icon": "https://lds-img.finalfantasyxiv.com/promo/h/0/U3f8Q98TbAeGvg_vXiHGOaa2d4.png",
             "mits": [
-                "reprisal"
+                "reprisal",
+                "shakeitoff"
             ]
         },
         {
@@ -22,7 +24,8 @@
             "role": "tank",
             "icon": "https://lds-img.finalfantasyxiv.com/promo/h/9/5JT3hJnBNPZSLAijAF9u7zrueQ.png",
             "mits": [
-                "reprisal"
+                "reprisal",
+                "darkmissionary"
             ]
         },
         {
@@ -30,7 +33,8 @@
             "role": "tank",
             "icon": "https://lds-img.finalfantasyxiv.com/promo/h/8/fc5PYpEFGrg4qPYDq_YBbCy1X0.png",
             "mits": [
-                "reprisal"
+                "reprisal",
+                "heartoflight"
             ]
         },
         {
@@ -38,7 +42,10 @@
             "role": "healer",
             "icon": "https://lds-img.finalfantasyxiv.com/promo/h/G/Na619RGtVtbEvNn1vyFoSlvZ84.png",
             "mits": [
-                
+                "asylum",
+                "plenaryindulgence",
+                "temperance",
+                "liturgyofthebell"
             ]
         },
         {
@@ -46,7 +53,15 @@
             "role": "healer",
             "icon": "https://lds-img.finalfantasyxiv.com/promo/h/s/2r8fm3U0Io7Pw1XT1tvnjPthp4.png",
             "mits": [
-                
+                "whisperingdawn",
+                "feyillumination",
+                "sacredsoil",
+                "indomitability",
+                "deploymenttactics",
+                "feyblessing",
+                "summonseraph",
+                "expedient",
+                "seraphism"
             ]
         },
         {
@@ -54,7 +69,12 @@
             "role": "healer",
             "icon": "https://lds-img.finalfantasyxiv.com/promo/h/E/g7JY4S1D-9S26VarEuIkPGIrFM.png",
             "mits": [
-                
+                "collectiveunconscious",
+                "celestialopposition",
+                "earthlystar",
+                "horoscope",
+                "neutralsect",
+                "macrocosmos"
             ]
         },
         {
@@ -62,7 +82,14 @@
             "role": "healer",
             "icon": "https://lds-img.finalfantasyxiv.com/promo/h/e/G0lQTD01LdCGk5pECSc7fbbmbM.png",
             "mits": [
-                
+                "physisii",
+                "kerachole",
+                "ixochole",
+                "pepsis",
+                "holos",
+                "panhaima",
+                "pneuma",
+                "philosophia"
             ]
         },
         {
@@ -70,7 +97,9 @@
             "role": "melee",
             "icon": "https://lds-img.finalfantasyxiv.com/promo/h/C/Ce_VQB6VPPJKTGJwxf3h5iujp4.png",
             "mits": [
-                "feint"
+                "feint",
+                "mantra",
+                "earthsreply"
             ]
         },
         {
@@ -102,6 +131,15 @@
             "role": "melee",
             "icon": "https://lds-img.finalfantasyxiv.com/promo/h/p/y8GHAXX4qhY7D-yqnCqtEPkjoo.png",
             "mits": [
+                "feint",
+                "arcanecrest"
+            ]
+        },
+        {
+            "name": "viper",
+            "role": "melee",
+            "icon": "https://lds-img.finalfantasyxiv.com/promo/h/p/sS2MK2LmSHGjziXHE6DIOw7_4U.png",
+            "mits": [
                 "feint"
             ]
         },
@@ -110,7 +148,8 @@
             "role": "ranged",
             "icon": "https://lds-img.finalfantasyxiv.com/promo/h/b/d7BM1x8OZRZU-9fTk-D7g1t2oc.png",
             "mits": [
-                
+                "troubadour",
+                "naturesminne"
             ]
         },
         {
@@ -118,7 +157,8 @@
             "role": "ranged",
             "icon": "https://lds-img.finalfantasyxiv.com/promo/h/2/oHLJxTt_OLDK_eQkRTBVNwwxeE.png",
             "mits": [
-                
+                "dismantle",
+                "tactician"
             ]
         },
         {
@@ -126,7 +166,8 @@
             "role": "ranged",
             "icon": "https://lds-img.finalfantasyxiv.com/promo/h/0/ZzzbixB1HHW9FaxNXdfY7Y7lvw.png",
             "mits": [
-                
+                "curingwaltz",
+                "shieldsamba"
             ]
         },
         {
@@ -150,7 +191,17 @@
             "role": "caster",
             "icon": "https://lds-img.finalfantasyxiv.com/promo/h/C/NRnqJxzRtbDKR1ZHzxazWBBR2Y.png",
             "mits": [
-                "addle"   
+                "addle",
+                "magickbarrier"
+            ]
+        },
+        {
+            "name": "pictomancer",
+            "role": "caster",
+            "icon": "https://lds-img.finalfantasyxiv.com/promo/h/e/t0iiQ-ja8O8YNZaVimL5Qb6Tnw.png",
+            "mits": [
+                "addle",
+                "temperagrassa"
             ]
         }
     ]

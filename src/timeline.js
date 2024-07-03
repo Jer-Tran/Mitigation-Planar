@@ -158,6 +158,8 @@ function createMitDiv(mit, width, numMits, t) {
     cd.style.backgroundColor = "grey"
     cd.style.zIndex = "-5"
 
+    // TODO: Something for the skill icon, much more readable that way
+
     d.appendChild(dur)
     d.appendChild(cd)
     return d

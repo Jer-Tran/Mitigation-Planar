@@ -59,12 +59,14 @@ class Job {
 function createMitList(mits) {
     let list = []
     console.log("mits are: " + mits)
+    // TODO: Because of scholar, need a way to increase the height of the planar rows based on the max number of mits
     for (let i in mits) {
         try {
             let m = createMiti(mits[i])
             list.push(m)
         }
         catch {
+            console.log("Failed to create mit for " + mits[i])
             continue
         }
     }
