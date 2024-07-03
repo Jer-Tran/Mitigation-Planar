@@ -2,7 +2,7 @@
     --icon-size: 30px;
     --timeline-width: 90%;
     --timeslot-width: 30px;
-    --row-height: 50px;
+    --row-height: 100px;
 }
 body {
     font-family: 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
@@ -52,6 +52,8 @@ div {
 }
 #classes {
     border: solid black 1px;
+    display: none; 
+    /* display none as moving them to be connected with timeline */
 }
 #classes img {
     width: var(--icon-size);
@@ -109,6 +111,26 @@ div {
 #table {
     /* margin-left: -30px; */
     height: inherit;
+}
+.timeline-class {
+    position: absolute;
+    /* border: solid black 2px; */
+    margin-left: -3em;
+    height: inherit;
+    width: 100px;
+}
+.timeline-class td {
+    width: var(--icon-size);
+}
+.timeline-class div {
+    height: inherit;
+    width: inherit;
+    align-content: center;
+}
+.timeline-class img {
+    height: var(--icon-size);
+    /* margin-top: 50%; */
+    margin: auto;
 }
 .selected {
     background-color: whitesmoke;

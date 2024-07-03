@@ -41,6 +41,13 @@ export function displayTimeline() {
     // -1 to leave space for timeline mechanics
     for (let i = -1; i < getPartySize(); i++) {
         let r = document.createElement("tr")
+        // TODO: a 0th td that is the job icon
+        let ico = document.createElement("td")
+        ico.classList.add("timeline-class")
+        // let icoDiv = document.createElement("div")
+        // ico.appendChild(icoDiv)
+        
+
         for (let j = _start; j < _instLen + paddingSeen; j++) {
             let td = document.createElement("td")
             td.onclick = function() { setCursor(j); displayTimeline() }
@@ -99,6 +106,16 @@ export function displayTimeline() {
         // Get mitlist for ith party member
         try {
             let mitList = p[i].getMits()
+            
+            // Adjusts row height based on number of mits
+            // 0-3 mits -> 50 size is fine,
+            // 8 mits -> 150 looks fine
+            let numMits = p[i].getNumMits()
+            let height = _rowHeight + Math.max((numMits - 3), 0) * 20
+            console.log(height)
+
+            ico.appendChild(p[i].getIcon())
+            
             for (var id in mitList) {
                 // Get the id'th mit
                 let mit = mitList[id]
@@ -106,11 +123,10 @@ export function displayTimeline() {
                 for (var x in mit.casts) {
                     // For each time it's casted, insert into tr
                     let t = mit.casts[x]
-                    let numMits = p[i].getNumMits()
-                    let d = createMitDiv(mit, px, numMits, t)
+                    let d = createMitDiv(mit, px, numMits, t, height)
                     d.classList.add("no-right-click")
                     d.addEventListener('contextmenu', function() {mit.removeCast(t); displayTimeline(); return false;})
-
+                    
                     while (r.children.item(t).childElementCount < id) {
                         let y = document.createElement("div")
                         y.classList.add("cast")
@@ -122,20 +138,22 @@ export function displayTimeline() {
                     r.children.item(t).appendChild(d)
                 }
             }
-            // TODO: Something to call the party side icons to redraw based on height
+            // Add job icon td here
+            r.style.height = height + "px"
         }
         catch(error) { // pass
         }
+        r.prepend(ico)
         t.appendChild(r)
     }
     tl.appendChild(t)
     console.log(p)
 }
 
-function createMitDiv(mit, width, numMits, t) {
+function createMitDiv(mit, width, numMits, t, rowHeight) {
     let d = document.createElement("div")
     d.classList.add("cast")
-    var castHeight = _rowHeight / numMits
+    var castHeight = rowHeight / Math.max(numMits, 2) // So we don't have a single mit that covers the entire width
     d.style.height = castHeight + "px"
     // d.style.marginTop = castHeight * offset + "px"
 

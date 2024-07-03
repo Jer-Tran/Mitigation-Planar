@@ -147,7 +147,7 @@ function createMitsDiv(mits, member) {
 
 function updateDisplay() {
     displayParty()
-    displayIcons()
+    // displayIcons() // Icons are now part of the timeline as to better align them
     displayTimeline()
 }
 
